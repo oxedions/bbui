@@ -1,0 +1,63 @@
+</head>
+<style>
+#TOTO {border-style: solid;
+  border-width: 1px;
+font-family: "Lucida Console", Monaco, monospace;   font-size: 0.6em;
+  height: 80%;
+  background-color: #17202a;
+  color: #fbfcfc;
+  padding-top: 2px;
+  padding-right: 2px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  overflow: scroll;
+}
+</style>
+    <script type="text/javascript">
+
+        function Ajax($node_hostname)
+        {
+            var
+                $http,
+                $self = arguments.callee;
+
+            if (window.XMLHttpRequest) {
+                $http = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                try {
+                    $http = new ActiveXObject('Msxml2.XMLHTTP');
+                } catch(e) {
+                    $http = new ActiveXObject('Microsoft.XMLHTTP');
+                }
+            }
+
+            if ($http) {
+                $http.onreadystatechange = function()
+                {
+                    if (/4|^complete$/.test($http.readyState)) {
+                        document.getElementById('ReloadThis').innerHTML = $http.responseText;
+                        setTimeout(function(){$self($node_hostname);}, 1000);
+                    }
+                };
+//                alert( 'Hello, world!' );
+                $http.open('GET', 'load_node_log?node_hostname='+$node_hostname, true);
+                $http.send(null);
+            }
+
+        }
+
+    </script>
+
+<body>
+
+NODE OPERATION LOGS
+<div id="TOTO">
+<p style="text-align:center;"></p>
+    <script type="text/javascript">
+       setTimeout(function() {Ajax("tata");}, 1000);
+    </script>
+    <div id="ReloadThis"> <p style="text-align:center;"></p> Getting logs...</div>
+</div>
+
+</body>
+</html>

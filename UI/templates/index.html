@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+{% include "head.html" with context %}
+  </head>
+<body>
+
+<section class="main-content columns is-fullheight">
+{% set menu_active = 'home' %}
+{% include "menu.html" with context %}
+
+  <div class="container column is-10">
+    <div class="section">
+
+		  <h1 class="title">Home</h1>
+		    <h2 class="subtitle">
+		      BlueBanquise management UI<br>
+		    </h2>
+
+<a href="initialize">Initialize</a>
+    </div>
+  </div>
+
+
+</section>
+
+</body>
+
+</html>

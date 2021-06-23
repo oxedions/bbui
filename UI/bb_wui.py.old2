@@ -1,0 +1,91 @@
+import subprocess
+from subprocess import Popen, PIPE
+import time
+from flask import Flask, render_template, request, redirect, jsonify
+#from functools import wraps
+#from flask.ext.classy import FlaskView
+
+app = Flask(__name__)
+#app.secret_key = 'dljsaklqk24e21cjn!Ew@@dsa5'
+
+process_id = None
+
+#ss Initialize_pool(FlaskView):
+
+#    def __init__(self, empty):
+#        pass
+
+#    process_id = None
+
+@app.route("/initialize")
+def initialize():
+    return render_template("initialize.html")
+
+@app.route("/try")
+def trytry():
+    return render_template("try.html")
+
+@app.route("/load_node_log")
+def tutu():
+    print(request.method)
+    stdout, stderr = subprocess.Popen("tail -20 /var/log/dnf.log", stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True).communicate()
+    return str(stdout).replace('\\n','<br>').replace('b"','').replace('<br>"','')
+
+@app.route("/initialize_running", methods = ['GET', 'POST'])
+def initialize_running():
+
+    global process_id
+
+#    if "clear_existing_inventory" in request.form:
+#        clear_existing_inventory = True
+#    if "add_example" in request.form:
+    print(request.method)
+    if request.method == 'POST':
+        process_id = subprocess.Popen("for((i=1;i<=10;i+=1)); do sleep 1s; echo coucou >> toto; done", shell=True)
+#        session["process_id"] = process_id
+        print(request.form)
+#    print(session["process_id"])
+        print("coucou")
+        print(process_id)
+        for i in range(1, 20):
+            retcode = process_id.poll()
+            if retcode is not None: # Process finished.
+                print("done")
+                break
+            else: # No process is done, wait a bit and check again.
+                print("waiting"+str(i))
+                time.sleep(1)
+                return redirect(request.url)
+#                continue
+        print("ok")
+#    print(request.form.get('cluster_name'))
+#    print(request.form)
+#    for toto in request.form:
+#        print(toto)
+        return redirect(request.url)
+    if request.method == 'GET':
+#        global process_id
+        print('Go into GET')
+        print(process_id)
+        for i in range(1, 20):
+            retcode = process_id.poll()
+            if retcode is not None: # Process finished.
+                print("done")
+                break
+            else: # No process is done, wait a bit and check again.
+                print("waiting"+str(i))
+                time.sleep(1)
+                continue
+
+    print(request.method)
+    return "running"
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+if __name__ == '__main__':
+    app.run()
+
+
+

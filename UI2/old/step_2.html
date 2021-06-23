@@ -1,0 +1,132 @@
+<h1 class="title is-2">Start cluster initialization</h1>
+
+<progress max="100" value="40" class="progress is-primary">66%</progress>
+
+<h2 class="title is-3">Step 2 - Global equipment settings</h2>
+
+Please review and set global equipment_profile settings for operating system.<br>
+Other equipment_profile settings will be set to default. You will be able to
+modify them later.
+<br>
+<br>
+<br>
+<form action="/initialize/step_2.html" method="POST">
+
+<h3 class="subtitle is-3">Default operating system</h3>
+<hr>
+Please enter default cluster distribution.<br>
+Supported distributions are: <b>redhat</b>, <b>centos</b>, <b>rockylinux</b>, <b>almalinux</b>, <b>oraclelinux</b>, <b>cloudlinux</b>.<br>
+Supported major version are: <b>7</b> or <b>8</b>.
+<br><br>
+{{ field_input('Operating system distribution','ep_operating_system.distribution','rockylinux') }}
+{{ field_input('Operating system distribution major version','ep_operating_system.distribution_major_version','8') }}
+{{ field_input('Operating system distribution minor version (optional)','ep_operating_system.distribution_version','8.4') }}
+
+<h3 class="subtitle is-3">Language</h3>
+<hr>
+{{ field_input('Keyboard layout','ep_configuration.keyboard_layout','us') }}
+{{ field_input('System language (recommended to not change this default)','ep_configuration.system_language','en_US.UTF-8') }}
+
+<h3 class="subtitle is-3">iPXE rom</h3>
+<hr>
+{{ field_select('iPXE network driver (ep_ipxe_driver)',ep_ipxe_driver,['default','snp','snponly'],'default') }}
+  <br>
+{{ field_select('System platform target (ep_ipxe_platform)',ep_ipxe_platform,['efi','pcbios'],'efi') }}
+  <br>
+{{ field_select('iPXE embed script (ep_ipxe_embed)',ep_ipxe_embed,['standard','dhcpretry'],'standard') }}
+<br>
+<br>
+
+
+
+<h3 class="subtitle is-3">EFI</h3>
+<hr>
+  <div class="field">
+    <label class="label">Preserve efi first boot device (ep_preserve_efi_first_boot_device):</label>
+    <div class="control">
+      <div class="select">
+        <select id="inventory_enable_icebergs" name="inventory_enable_icebergs">
+          <option selected>true</option>
+          <option>false</option>
+        </select>
+      </div>
+    </div>
+  </div>
+<br>
+<br>
+
+<h3 class="subtitle is-3">Kernel command line</h3>
+<hr>
+  <div class="field">
+    <label class="label">Kernel parameters (ep_kernel_parameters):</label>
+    <div class="control">
+      <input class="input" type="text" placeholder="Text input" id="inventory_domain_name" name="inventory_domain_name" value="nomodeset">
+    </div>
+  </div>
+  <br>
+  <div class="field">
+    <label class="label">BMC Console (ep_console):</label>
+    <div class="content">
+      Tip:
+      <ul>
+        <li>VM: (leave empty)</li>
+        <li>SuperMicro: console=tty0 console=ttyS1,115200</li>
+        <li>Gigabyte: console=tty0 console=ttyS0,115200</li>
+      </ul>
+    </div>
+    <div class="control">
+      <input class="input" type="text" placeholder="Text input" id="inventory_domain_name" name="inventory_domain_name" value="">
+    </div>
+  </div>
+  <br>
+  <br>
+
+<h3 class="subtitle is-3">OS configuration</h3>
+<hr>
+  <div class="field">
+    <label class="label">Partitioning (ep_partitioning):</label>
+    <div class="control">
+      <textarea placeholder="Textarea" class="textarea" id="inventory_domain_name" name="inventory_domain_name" value="nomodeset"></textarea>
+    </div>
+  </div>
+  <br>
+  <br>
+
+<h3 class="subtitle is-3">Security</h3>
+<hr>
+  <div class="field">
+    <label class="label">Access control (ep_access_control):</label>
+    <div class="control">
+      <div class="select">
+        <select id="inventory_enable_icebergs" name="inventory_enable_icebergs">
+          <option selected>enforcing</option>
+          <option>permissive</option>
+          <option>disabled</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="field">
+    <label class="label">Firewall (ep_firewall):</label>
+    <div class="control">
+      <div class="select">
+        <select id="inventory_enable_icebergs" name="inventory_enable_icebergs">
+          <option selected>true</option>
+          <option>false</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+
+
+  <br>
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button">Submit</button>
+    </div>
+  </div>
+
+</form>

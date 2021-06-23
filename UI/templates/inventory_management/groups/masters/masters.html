@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+{% include "head.html" with context %}
+  </head>
+<body>
+
+<section class="main-content columns is-fullheight">
+{% set menu_active = 'groups_masters' %}
+{% include "menu.html" with context %}
+
+  <div class="container column is-10">
+    <div class="section">
+
+		  <h1 class="title">Master Groups Management</h1>
+		    <h2 class="subtitle">
+		      Manage master groups of the cluster<br>
+		    </h2>
+
+		{% if (mg_group_list | length) == 0 %}
+					<div class="notification is-warning">
+					  <strong>No master groups detected</strong>.<br>
+		        This is an expected behavior if you are creating a new cluser inventory.<br>
+					  If cluster inventory was already built, there might be an issue somewhere.
+					</div>
+		{% else %}
+		{% for group in mg_group_list %}
+					<div class="box">
+					  <article class="media">
+					    <div class="media-left">
+					      <figure class="image is-64x64">
+ <!-- https://www.svgrepo.com/svg/28221/three-servers -->
+					        <img src="{{ url_for('static', filename='images/mg_group.png') }}" alt="mg_group.png">
+					      </figure>
+					    </div>
+					    <div class="media-content">
+					      <div class="content">
+					        <p>
+					          <strong>{{group | replace('mg_','') | upper}}</strong>
+					          <br>
+					          Details....
+					        </p>
+					      </div>
+					      <nav class="level is-mobile">
+					        <div class="level-left">
+					          <a class="level-item" aria-label="reply" href=''>
+					            <span class="icon is-small"><i class="fas fa-reply" aria-hidden="true"></i></span><span>Edit</span>
+					          </a>
+					          <a class="level-item" aria-label="retweet">
+					            <span class="icon is-small"><i class="fas fa-retweet" aria-hidden="true"></i></span><span>Show</span>
+					          </a>
+					        </div>
+					      </nav>
+					    </div>
+					  </article>
+					</div>
+		{% endfor %}
+		{% endif %}
+		    <a class="button" href="/inventory_management/groups/masters/add">
+          <span class="icon is-small"><i class="fa fa-plus"></i></span><span>Add new master group</span>
+        </a>
+
+    </div>
+  </div>
+
+
+
+</section>
+
+
+</body>
+</html>

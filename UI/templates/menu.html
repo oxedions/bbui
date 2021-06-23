@@ -1,0 +1,29 @@
+  <aside class="column is-2 is-fullheight section">
+
+    <ul class="menu-list">
+      <li><a {% if 'home' in menu_active %}class="is-active"{% endif %}><span class="icon"><i class="fa fa-home"></i></span>Home</a></li>
+    </ul>
+    <p class="menu-label">
+      Inventory management
+    </p>
+    <ul class="menu-list">
+      <li>
+        <a>Global settings</a>
+      </li>
+      <li>
+        <a>Groups</a>
+        <ul>
+          <li><a {% if 'groups_masters' in menu_active %}class="is-active"{% endif %} href="/inventory_management/groups/masters">Masters</a></li>
+          <li><a {% if 'groups_equipment' in menu_active %}class="is-active"{% endif %} href="/inventory_management/groups/equipment">Equipment</a></li>
+          <li><a>Racks</a></li>
+          <li><a>Customs</a></li>
+        </ul>
+      </li>
+      <li><a>Hosts</a></li>
+      <li><a>Playbooks</a></li>
+    </ul>
+    <p class="menu-label">
+      Hosts management
+    </p>
+
+  </aside>

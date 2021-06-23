@@ -1,0 +1,64 @@
+#log_console {border-style: solid;
+  border-width: 1px;
+font-family: "Lucida Console", Monaco, monospace;   font-size: 0.6em;
+  height: 80%;
+  background-color: #17202a;
+  color: #fbfcfc;
+  padding-top: 2px;
+  padding-right: 2px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  overflow: scroll;
+}
+
+#log_console_2 {
+font-family: "Lucida Console", Monaco, monospace;   font-size: 0.6em;
+	font-size: 0.7em;
+	font-weight: 400;
+	line-height: 1.5;
+	background-color: white;
+	border-radius: 6px;
+	box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+	color: #4a4a4a;
+	/* display: block; */
+	padding: 1.25rem;
+  overflow: scroll;
+  height: 30em;
+  position: relative;
+  bottom: 0;
+}
+
+/*https://loading.io/css/*/
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid hsl(217, 71%, 53%);
+  border-color: hsl(217, 71%, 53%) transparent hsl(217, 71%, 53%) transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#loader_outer {
+  width: 100%;
+  text-align: center;
+}
+
+#loader_inner {
+  display: inline-block;
+}

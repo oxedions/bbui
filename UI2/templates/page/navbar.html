@@ -1,0 +1,22 @@
+<!--
+###################################################
+NAVBAR
+-->
+<nav class="navbar is-dark has-shadow">
+  <div class="navbar-brand">
+    <a href="#/" class="navbar-item router-link-active"><img src="{{ url_for('static', filename='images/bluebanquise_logo_white.svg') }}" alt="BlueBanquise UI"></a>
+    <div data-target="navbarExampleTransparentExample" class="navbar-burger burger"><span></span> <span></span> <span></span>
+    </div>
+  </div>
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a href="https://bulma.io/" class="navbar-item">Home</a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a href="/documentation/overview/start/" class="navbar-link is-active">Inventory</a>
+        <div class="navbar-dropdown is-boxed">
+          <a href="/initialize/index.html" class="navbar-item">Initialize</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

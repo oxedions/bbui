@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bulma.min.css') }}">
+  </head>
+<body>
+
+<nav class="navbar is-dark"><div class="navbar-brand"><a href="#/" class="navbar-item router-link-active"><img src="logotype12.png?54e8164aa7c75ade230c0485e915107f" alt="Bulma-fluent"></a> <div data-target="navbarExampleTransparentExample" class="navbar-burger burger"><span></span> <span></span> <span></span></div></div> <div id="navbarExampleTransparentExample" class="navbar-menu"><div class="navbar-start"><a href="https://bulma.io/" class="navbar-item">
+            Home
+          </a> <div class="navbar-item has-dropdown is-hoverable"><a href="/documentation/overview/start/" class="navbar-link">
+              Docs
+            </a> <div class="navbar-dropdown is-boxed"><a href="/documentation/overview/start/" class="navbar-item">
+                Overview
+              </a> <a href="https://bulma.io/documentation/modifiers/syntax/" class="navbar-item">
+                Modifiers
+              </a> <a href="https://bulma.io/documentation/columns/basics/" class="navbar-item">
+                Columns
+              </a> <a href="https://bulma.io/documentation/layout/container/" class="navbar-item">
+                Layout
+              </a> <a href="https://bulma.io/documentation/form/general/" class="navbar-item">
+                Form
+              </a> <hr class="navbar-divider"> <a href="https://bulma.io/documentation/elements/box/" class="navbar-item">
+                Elements
+              </a> <a href="https://bulma.io/documentation/components/breadcrumb/" class="navbar-item is-active">
+                Components
+              </a></div></div></div> <div class="navbar-end"><div class="navbar-item"><div class="field is-grouped"><p class="control"><a data-social-network="Twitter" data-social-action="tweet" data-social-target="http://localhost:4000" target="_blank" href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&amp;hashtags=bulmaio&amp;url=http://localhost:4000&amp;via=jgthms" class="bd-tw-button button is-light"><span class="icon"><i class="fab fa-twitter" aria-hidden="true"></i></span> <span>
+                    Tweet
+                  </span></a></p> <p class="control"><a href="https://github.com/jgthms/bulma/releases/download/0.7.1/bulma-0.7.1.zip" class="button is-light"><span class="icon"><i class="fas fa-download" aria-hidden="true"></i></span> <span>Download</span></a></p></div></div></div></div></nav>
+
+
+
+<aside class="menu"><p class="menu-label">
+              General
+            </p> <ul class="menu-list"><li><a><span class="icon"><i aria-hidden="true" class="fas fa-box"></i></span>
+                  Dashboard
+                </a></li> <li><a class="is-active"><span class="icon"><i aria-hidden="true" class="fas fa-address-card"></i></span>
+                  Customers</a></li></ul> <p class="menu-label">
+              Administration
+            </p> <ul class="menu-list"><li><a><span class="icon"><i aria-hidden="true" class="fas fa-cog"></i></span>
+                  Team Settings</a></li> <li><a><span class="icon"><i aria-hidden="true" class="fas fa-child"></i></span>
+                  Manage Your Team</a></li> <li class="is-disabled"><a><span class="icon"><i aria-hidden="true" class="fas fa-at"></i></span>
+                  Invitations</a></li> <li><a><span class="icon"><i aria-hidden="true" class="fas fa-cloudversify"></i></span>
+                  Cloud Storage Settings</a></li> <li><a><span class="icon"><i aria-hidden="true" class="fas fa-user"></i></span>
+                  Authentication</a></li></ul> <p class="menu-label">
+              Transactions
+            </p> <ul class="menu-list"><li><a><span class="icon"><i aria-hidden="true" class="fas fa-amazon-pay"></i></span>
+                  Payments</a></li> <li><a><span class="icon"><i aria-hidden="true" class="fas fa-align-center"></i></span>
+                  Transfers</a></li> <li><a><span class="icon"><i aria-hidden="true" class="fas fa-briefcase"></i></span>
+                  Balance</a></li></ul></aside>
+
+</body>
+
+</html>
+

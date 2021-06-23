@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Initialize Running</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bulma.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bulma-steps.css') }}">
+<style>
+#log_console {border-style: solid;
+  border-width: 1px;
+font-family: "Lucida Console", Monaco, monospace;   font-size: 0.6em;
+  height: 80%;
+  background-color: #17202a;
+  color: #fbfcfc;
+  padding-top: 2px;
+  padding-right: 2px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  overflow: scroll;
+}
+</style>
+    <script defer src="{{ url_for('static', filename='all.js') }}"></script>
+    <script>
+
+// Exécute un appel AJAX GET
+// Prend en paramètres l'URL cible et la fonction callback appelée en cas de succès
+function ajaxGet(url, callback) {
+    var req = new XMLHttpRequest();
+    req.open("GET", url);
+    req.addEventListener("load", function () {
+        if (req.status >= 200 && req.status < 400) {
+            // Appelle la fonction callback en lui passant la réponse de la requête
+            callback(req.responseText);
+        } else {
+            console.error(req.status + " " + req.statusText + " " + url);
+        }
+    });
+    req.addEventListener("error", function () {
+        console.error("Network error with " + url);
+    });
+    req.send(null);
+}
+
+function ajaxLogGet($url,$arguments)
+{
+    var
+        $http,
+        $self = arguments.callee;
+
+    if (window.XMLHttpRequest) {
+        $http = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        try {
+            $http = new ActiveXObject('Msxml2.XMLHTTP');
+        } catch(e) {
+            $http = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+    }
+
+    if ($http) {
+        $http.onreadystatechange = function()
+        {
+            if (/4|^complete$/.test($http.readyState)) {
+              if (window.run_end == 0) {
+                document.getElementById('ReloadThis').innerHTML = $http.responseText;
+                setTimeout(function(){$self($url,$arguments);}, 1000);
+              }
+            }
+        };
+        $http.open('GET', $url, true);
+        $http.send(null);
+    }
+
+}
+
+
+
+
+function ajax_get(url) {
+    var req = new XMLHttpRequest();
+    req.open("GET", url);
+    req.addEventListener("load", function () {
+        if (req.status >= 200 && req.status < 400) {
+ console.log("Hello world!");
+ console.log(req.responseText);
+            return req.responseText;
+        } else {
+            console.error(req.status + " " + req.statusText + " " + url);
+        }
+    });
+    req.addEventListener("error", function () {
+        console.error("Network error with " + url);
+    });
+    req.send(null);
+}
+
+function ajax_s_get(url) {
+    var req = new XMLHttpRequest();
+    req.open("GET", url);
+    req.addEventListener("load", function () {
+ console.log("Hello world!");
+ console.log(String(req.responseText));
+            return String(req.responseText);
+    });
+    req.send(null);
+}
+
+function htmlwrite(reponse) {
+    document.getElementById("demo").innerHTML = reponse;
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+run_end = 0;
+
+async function page_run() {
+
+  for (let step = 0; step < 20; step++) { // main loop, will wait 20s
+    await sleep(1000);
+    ajaxGet("/initialize_running", page_update);
+    if (window.run_end == 1) { console.log("Exiting main loop"); break;}
+  }
+
+}
+
+function page_update(execution_json) {
+  // if (execution_status == 0) {
+  //   document.getElementById("demo").innerHTML = '<button class="button" >Exit</button>';
+  // }
+  execution_json_parsed = JSON.parse(execution_json);
+  if (execution_json_parsed.process_step == 0) {
+  } else if (execution_json_parsed.process_step == 1) {
+    document.getElementById('id_step_0').classList.remove('is-active');
+		document.getElementById('id_step_1').classList.add('is-active');
+  } else if (execution_json_parsed.process_step == 2) {
+    document.getElementById('id_step_1').classList.remove('is-active');
+		document.getElementById('id_step_2').classList.add('is-active');
+  } else if (execution_json_parsed.process_step == 3) {
+    document.getElementById('id_step_2').classList.remove('is-active');
+		document.getElementById('id_step_3').classList.add('is-active');
+  } else {
+    //document.getElementById("demo1").innerHTML = "error";
+  }
+
+  if (execution_json_parsed.process_status == 0) {
+    document.getElementById("id_button_done").innerHTML = '<button class="button" >Done</button>';
+    document.getElementById('id_step_3').classList.remove('is-active');
+		document.getElementById('id_step_4').classList.add('is-active');
+    window.run_end = 1;
+  }
+
+}
+
+</script>
+
+  </head>
+<body>
+
+<section class="section">
+<div class="container">
+  <h1 class="title">Initializing...</h1>
+    <h2 class="subtitle">
+      Initialization is running, please wait.<br>
+    </h2>
+    <br>
+    <br>
+    <ul class="steps" id="id_steps">
+      <li class="steps-segment is-active" id="id_step_0">
+        <span class="steps-marker is-blue"></span>
+        <div class="steps-content">
+          <p class="is-size-4">Start</p>
+        </div>
+      </li>
+      <li class="steps-segment is-blue" id="id_step_1">
+        <span class="steps-marker"></span>
+        <div class="steps-content">
+          <p class="is-size-4">Backup</p>
+          <p>Backup existing repository if exist.</p>
+        </div>
+      </li>
+      <li class="steps-segment" id="id_step_2">
+        <span class="steps-marker"></span>
+        <div class="steps-content">
+          <p class="is-size-4">Copy new repository</p>
+          <p>Copy new repository.</p>
+        </div>
+      </li>
+      <li class="steps-segment" id="id_step_3">
+        <span class="steps-marker"></span>
+        <div class="steps-content">
+          <p class="is-size-4">Tune repository</p>
+          <p>Tune repository according to user requirements.</p>
+        </div>
+      </li>
+      <li class="steps-segment" id="id_step_4">
+        <span class="steps-marker"></span>
+        <div class="steps-content">
+          <p class="is-size-4">Done!</p>
+        </div>
+      </li>
+    </ul>
+
+		<form action="/" id="id_button_done">
+		  <button class="button is-loading" >Loading</button>
+		</form>
+    <br>
+    <br>
+    <h2 class="subtitle">
+      Main log.<br>
+    </h2>
+		<div id="log_console">
+		<p style="text-align:center;"></p>
+		    <script type="text/javascript">
+		       setTimeout(function() {ajaxLogGet("/main_log","empty");}, 1000);
+		    </script>
+		    <div id="ReloadThis"> <p style="text-align:center;"></p> Getting logs...</div>
+		</div>
+  </div>
+
+</section>
+
+<script type="text/javascript">
+page_run();
+</script>
+
+
+
+</body>
+
+</html>

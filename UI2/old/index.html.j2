@@ -1,0 +1,21 @@
+{% include "page/head.html.j2" with context %}
+<body>
+
+{% include "page/navbar.html.j2" with context %}
+
+<section class="main-content columns is-fullheight">
+
+{% include "page/menu.html.j2" with context %}
+
+  <div class="container column is-10">
+    <div class="section">
+{{ content }}
+
+
+    </div>
+  </div>
+
+</section>
+
+</body>
+{% include "page/foot.html.j2" with context %}

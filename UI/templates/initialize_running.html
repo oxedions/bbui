@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Initialize Running</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bulma.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bulma-steps.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script defer src="{{ url_for('static', filename='all.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='main.js') }}"></script>
+    <script>
+
+
+run_end = 0;
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+async function page_run() {
+
+  for (let step = 0; step < 20; step++) { // main loop, will wait 20s
+    await sleep(1000);
+    ajaxGet("/initialize_running", page_update);
+    if (window.run_end == 1) { console.log("Exiting main loop"); break;}
+  }
+
+}
+
+function page_update(execution_json) {
+  // if (execution_status == 0) {
+  //   document.getElementById("demo").innerHTML = '<button class="button" >Exit</button>';
+  // }
+  execution_json_parsed = JSON.parse(execution_json);
+  if (execution_json_parsed.process_step == 0) {
+  } else if (execution_json_parsed.process_step == 1) {
+    document.getElementById('id_step_0').classList.remove('is-active');
+		document.getElementById('id_step_1').classList.add('is-active');
+  } else if (execution_json_parsed.process_step == 2) {
+    document.getElementById('id_step_1').classList.remove('is-active');
+		document.getElementById('id_step_2').classList.add('is-active');
+  } else if (execution_json_parsed.process_step == 3) {
+    document.getElementById('id_step_2').classList.remove('is-active');
+		document.getElementById('id_step_3').classList.add('is-active');
+  } else {
+    //document.getElementById("demo1").innerHTML = "error";
+  }
+
+  if (execution_json_parsed.process_status == 0) {
+    document.getElementById('id_button_done').innerHTML = '<button class="button" >Done</button>';
+    document.getElementById('loader_outer').innerHTML = ' ';
+    document.getElementById('id_step_3').classList.remove('is-active');
+		document.getElementById('id_step_4').classList.add('is-active');
+    window.run_end = 1;
+  }
+
+}
+
+</script>
+
+  </head>
+<body>
+
+<section class="section">
+<div class="container">
+  <h1 class="title">Initializing...</h1>
+    <h2 class="subtitle">
+      Process is running, please wait, should be quick.<br>
+      Logs of current process are available above.<br>
+    </h2>
+    <br>
+    <br>
+    <ul class="steps is-hollow" id="id_steps">
+      <li class="steps-segment is-active" id="id_step_0">
+        <span class="steps-marker is-blue"></span>
+        <div class="steps-content">
+          <p class="is-size-4">Start</p>
+        </div>
+      </li>
+      <li class="steps-segment is-blue" id="id_step_1">
+        <span class="steps-marker"></span>
+        <div class="steps-content">
+          <p class="is-size-4">Backup</p>
+          <p>Backup existing repository if exist.</p>
+        </div>
+      </li>
+      <li class="steps-segment" id="id_step_2">
+        <span class="steps-marker"></span>
+        <div class="steps-content">
+          <p class="is-size-4">Copy new repository</p>
+          <p>Copy new repository.</p>
+        </div>
+      </li>
+      <li class="steps-segment" id="id_step_3">
+        <span class="steps-marker"></span>
+        <div class="steps-content">
+          <p class="is-size-4">Tune repository</p>
+          <p>Tune repository according to user requirements.</p>
+        </div>
+      </li>
+      <li class="steps-segment" id="id_step_4">
+        <span class="steps-marker"></span>
+        <div class="steps-content">
+          <p class="is-size-4">Done!</p>
+        </div>
+      </li>
+    </ul>
+
+		<div id="loader_outer"><div id="loader_inner"><div class="lds-dual-ring"></div></div></div>
+
+
+		<form action="/" id="id_button_done">
+		  <button class="button is-loading" >Loading</button>
+		</form>
+    <br>
+    <br>
+    <h2 class="subtitle">
+      Main log.<br>
+    </h2>
+
+    <!-- <div class="box">
+		  <script type="text/javascript">
+		     setTimeout(function() {ajaxLogGet("/main_log","empty");}, 1000);
+		  </script>
+      <div id="ReloadThis"> <p style="text-align:center;"></p> Getting logs...</div>
+    </div> -->
+
+		<div id="log_console_2">
+		<p style="text-align:center;"></p>
+		    <script type="text/javascript">
+		       setTimeout(function() {ajaxLogGet("/main_log","empty");}, 1000);
+		    </script>
+		    <div id="ReloadThis"> <p style="text-align:center;"></p> Getting logs...</div>
+		</div>
+  </div>
+
+</section>
+
+<script type="text/javascript">
+page_run();
+</script>
+
+
+
+</body>
+
+</html>

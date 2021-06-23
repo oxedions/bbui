@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+{% include "head.html" with context %}
+  </head>
+<body>
+
+<section class="main-content columns is-fullheight">
+{% set menu_active = 'groups_equipment' %}
+{% include "menu.html" with context %}
+
+  <div class="container column is-10">
+    <div class="section">
+
+		  <h1 class="title">Add Equipment Group</h1>
+		    <h2 class="subtitle">
+		      Add a new equipment group.<br>
+		    </h2>
+
+		  <form action="/inventory_management/groups/equipment" method="POST">
+
+        <div class="box">
+  		    <h3 class="subtitle">
+  		      General:<br>
+  		    </h3>
+
+  		    <div class="field">
+  		      <label class="label">Enter new equipment group name:</label>
+  		      <div class="control has-icons-left">
+  		        <input class="input" type="text" placeholder="Text input" id="add_equipment_group_name" name="add_equipment_group_name">
+  		        <span class="icon is-small is-left">
+  		          <i class="fas fa-seedling"></i>
+  		        </span>
+  		      </div>
+  		    </div>
+
+  		    <div class="field">
+  		      <label class="label">Enter equipment group informations, as a reminder:</label>
+  		      <div class="control has-icons-left">
+  		        <input class="input" type="text" placeholder="Text input" id="add_equipment_group_info" name="add_equipment_equipment_info" value="This is a generic group...">
+  		        <span class="icon is-small is-left">
+  		          <i class="fas fa-seedling"></i>
+  		        </span>
+  		      </div>
+  		    </div>
+        </div>
+
+        <div class="box">
+  		    <h3 class="subtitle">
+  		      Equipment profile:<br>
+  		    </h3>
+
+          PXE boot:<br>
+          <div class="field">
+            <label class="label">ipxe_driver:</label>
+            <div class="control">
+              <div class="select">
+                <select id="add_equipment_ipxe_driver" name="add_equipment_ipxe_driver">
+                  <option>default</option>
+                  <option>snp</option>
+                  <option>snponly</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">ipxe_platform:</label>
+            <div class="control">
+              <div class="select">
+                <select id="add_equipment_ipxe_platform" name="add_equipment_ipxe_platform">
+                  <option>pcbios</option>
+                  <option>efi</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">ipxe_embed:</label>
+            <div class="control">
+              <div class="select">
+                <select id="add_equipment_ipxe_embed" name="add_equipment_ipxe_embed">
+                  <option>standard</option>
+                  <option>dhcpretry</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">preserve_efi_first_boot_device:</label>
+            <div class="control">
+              <div class="select">
+                <select id="add_equipment_preserve_efi_first_boot_device" name="add_equipment_preserve_efi_first_boot_device">
+                  <option>true</option>
+                  <option>false</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          Kernel parameters:<br>
+  		    <div class="field">
+  		      <label class="label">console:</label>
+  		      <div class="control has-icons-left">
+  		        <input class="input" type="text" placeholder="Text input" id="add_equipment_console" name="add_equipment_console">
+  		        <span class="icon is-small is-left">
+  		          <i class="fas fa-seedling"></i>
+  		        </span>
+  		      </div>
+  		    </div>
+  		    <div class="field">
+  		      <label class="label">kernel_parameters:</label>
+  		      <div class="control has-icons-left">
+  		        <input class="input" type="text" placeholder="Text input" id="add_equipment_kernel_parameters" name="add_equipment_kernel_parameters">
+  		        <span class="icon is-small is-left">
+  		          <i class="fas fa-seedling"></i>
+  		        </span>
+  		      </div>
+  		    </div>
+
+          Security:<br><br>
+  		    <div class="field">
+            <input type="checkbox" class="switch" id="add_equipment_access_control" name="add_equipment_access_control">
+  		      <label for="add_equipment_access_control">access_control:</label>
+  		    </div>
+  		    <div class="field">
+            <input type="checkbox" class="switch" id="add_equipment_firewall" name="add_equipment_firewall">
+  		      <label for="add_equipment_firewall">firewall:</label>
+  		    </div>
+
+          Partitioning:<br><br>
+          <div class="field">
+            <div class="control">
+              <textarea class="textarea" placeholder="Raw partitioning" rows="10" id="add_equipment_partitioning" name="add_equipment_partitioning"></textarea>
+  		      </div>
+  		    </div>
+
+          Operating System:<br><br>
+          <div class="field">
+            <label class="label">distribution:</label>
+            <div class="control has-icons-left">
+              <input class="input" type="text" placeholder="Text input" id="add_equipment_distribution" name="add_equipment_distribution" value="centos">
+              <span class="icon is-small is-left">
+                <i class="fas fa-seedling"></i>
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">distribution_major_version:</label>
+            <div class="control has-icons-left">
+              <input class="input" type="text" placeholder="Text input" id="add_equipment_distribution_major_version" name="add_equipment_distribution_major_version" value="8">
+              <span class="icon is-small is-left">
+                <i class="fas fa-seedling"></i>
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">distribution_version:</label>
+            <div class="control has-icons-left">
+              <input class="input" type="text" placeholder="Text input" id="add_equipment_distribution_version" name="add_equipment_distribution_version" value="8.1">
+              <span class="icon is-small is-left">
+                <i class="fas fa-seedling"></i>
+              </span>
+            </div>
+          </div>
+
+          Localisation:<br><br>
+          <div class="field">
+            <label class="label">keyboard_layout:</label>
+            <div class="control has-icons-left">
+              <input class="input" type="text" placeholder="Text input" id="add_equipment_keyboard_layout" name="add_equipment_keyboard_layout" value="us">
+              <span class="icon is-small is-left">
+                <i class="fas fa-seedling"></i>
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">system_language:</label>
+            <div class="control has-icons-left">
+              <input class="input" type="text" placeholder="Text input" id="add_equipment_system_language" name="add_equipment_system_language" value="en_US.UTF-8">
+              <span class="icon is-small is-left">
+                <i class="fas fa-seedling"></i>
+              </span>
+            </div>
+          </div>
+
+          Hardware:<br><br>
+          <div class="field">
+            <label class="label">equipment_type:</label>
+            <div class="control has-icons-left">
+              <input class="input" type="text" placeholder="Text input" id="add_equipment_equipment_type" name="add_equipment_equipment_type" value="server">
+              <span class="icon is-small is-left">
+                <i class="fas fa-seedling"></i>
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+		    <div class="field">
+		      <div class="control">
+		        <button class="button is-link">Submit</button>
+		      </div>
+		    </div>
+
+		  </form>
+
+    </div>
+  </div>
+
+
+
+</section>
+
+
+</body>
+</html>

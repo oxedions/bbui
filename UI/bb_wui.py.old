@@ -1,0 +1,57 @@
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+# Getting arguements from a GET form
+@app.route("/search")
+def do_search():
+    make = request.args.get('make')
+    model = request.args.get('model')
+    return "You search for car make: {0}, and car model: {1}".format(make, model)
+
+
+# Getting arguements from a POST form
+@app.route("/search_post", methods = ['POST'])
+def do_post_search():
+    make = request.form.get('make')
+    model = request.form.get('model')
+    return "You search for car make: {0}, and car model: {1}".format(make, model)
+
+@app.route("/", methods=['GET', 'POST'])
+def index():
+#    form = CustomForm(request.form)
+    form = {}
+    if request.method == 'POST':
+        form['username'] = request.form.get('Name')
+        print(request.form.get('Name'))
+##        if request.form.get('Encrypt') == 'Encrypt':
+##            # pass
+##            print("Encrypted")
+###            print(request.form['input_name'])
+##        elif  request.form.get('Decrypt') == 'Decrypt':
+##            # pass # do something else
+#            print("Decrypted")
+##        else:
+##            # pass # unknown
+##            return render_template("index.html")
+    elif request.method == 'GET':
+         form['username'] = 'pikachu'
+#        # return render_template("index.html")
+#        print("No Post Back Call")
+    return render_template("index.html",form=form)
+
+@app.route('/result',methods = ['POST', 'GET'])
+def result():
+    print('2')
+    print(request.form)
+    if request.method == 'POST':
+        result = request.form
+        return render_template("result.html",result = result)
+
+
+
+if __name__ == '__main__':
+    app.run()
+
+
+
