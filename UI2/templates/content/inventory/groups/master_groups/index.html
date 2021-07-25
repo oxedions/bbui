@@ -1,0 +1,29 @@
+<h1 class="title">Master Groups Management</h1>
+  <h2 class="subtitle">
+    Manage master groups of the cluster<br>
+  </h2>
+
+
+<a class="button" href="/inventory/groups/master_groups/add.html">
+  <span class="icon is-small"><i class="fa fa-play"></i></span><span>Add master group</span>
+</a>
+<a class="button" href="/inventory/groups/master_groups/remove.html">
+  <span class="icon is-small"><i class="fa fa-play"></i></span><span>Remove master group</span>
+</a>
+<br>
+<br>
+<br>
+{% if (master_groups_data | length) == 0 %}
+			<div class="notification is-warning">
+			  <strong>No master groups detected</strong>.<br>
+			</div>
+{% endif %}
+{% for mg in master_groups_data %}
+<a href="/inventory/groups/master_groups/manage.html?master_group={{ mg }}">
+      <div class="card">
+        <div class="card-header"><p class="card-header-title">{{ mg }}</p></div>
+        <div class="card-content"><div class="content">Description: {{ master_groups_data[mg]['description'] }}</div></div>
+      </div>
+      <br />
+</a>
+{% endfor %}

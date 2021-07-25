@@ -1,0 +1,34 @@
+<h1 class="title">Manage Master Group</h1>
+
+
+<form action="/inventory/groups/master_groups/index.html?master_group={{master_group}}" method="POST">
+
+  <h2 class="subtitle">
+    Description:<br>
+  </h2>
+
+  <div class="field">
+    <label class="label">Use the following field to set group description:</label>
+    <div class="control">
+      <textarea class="textarea" placeholder="Variables here in YAML." id="manage_master_group_description" name="manage_master_group_description">{{ master_group_data['description'] }}</textarea>
+    </div>
+  </div>
+
+  <h2 class="subtitle">
+    Custom variables:<br>
+  </h2>
+
+  <div class="field">
+    <label class="label">Use the following field to set group custom variables (YAML):</label>
+    <div class="control">
+      <textarea class="textarea" placeholder="Variables here in YAML." id="manage_master_group_variables" name="manage_master_group_variables">{{ master_group_custom_variables }}</textarea>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-link">Submit</button>
+    </div>
+  </div>
+
+</form>

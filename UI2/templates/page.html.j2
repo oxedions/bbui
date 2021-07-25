@@ -33,11 +33,11 @@
 
 <section class="main-content columns is-fullheight">
 
-{% if page_left_menu is defined and page_left_menu %}
-{% include "page/menu.html" with context %}
+{% if page_left_menu is defined %}
+{% include page_left_menu with context %}
 {% endif %}
 
-  <div class="container column is-10">
+  <div class="container column is-9">
     <div class="section">
 
 {% include page_content_path with context %}

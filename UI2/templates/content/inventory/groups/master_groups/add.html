@@ -1,0 +1,34 @@
+<h1 class="title">Add Master Group</h1>
+  <h2 class="subtitle">
+    Add a new master group.<br>
+  </h2>
+
+<form action="/inventory/groups/master_groups/index.html" method="POST">
+
+  <div class="field">
+    <label class="label">Enter new master group name:</label>
+    <div class="control has-icons-left">
+      <input class="input" type="text" placeholder="Text input" id="add_master_group_name" name="add_master_group_name">
+      <span class="icon is-small is-left">
+        <i class="fas fa-seedling"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Enter master group description, as a reminder:</label>
+    <div class="control has-icons-left">
+      <input class="input" type="text" placeholder="Text input" id="add_master_group_description" name="add_master_group_description" value="This is a generic group...">
+      <span class="icon is-small is-left">
+        <i class="fas fa-seedling"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-link">Submit</button>
+    </div>
+  </div>
+
+ </form>

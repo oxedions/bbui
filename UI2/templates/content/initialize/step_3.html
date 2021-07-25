@@ -1,0 +1,30 @@
+<h1 class="title is-2">Start cluster initialization</h1>
+
+<progress max="100" value="75" class="progress is-primary">75%</progress>
+
+<h2 class="title is-3">Step 3 - Example content</h2>
+
+Do you wish to populate new inventory with example content?
+<br>
+<br>
+<form action="/initialize/report.html" method="POST">
+  <div class="field">
+    <label class="label">Include example content:</label>
+    <div class="control">
+      <div class="select">
+        <select id="inventory_include_example" name="inventory_include_example">
+          <option>True</option>
+          <option selected>False</option>
+        </select>
+      </div>
+    </div>
+  </div>
+<br>
+  <br>
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-warning">Generate new inventory</button>
+    </div>
+  </div>
+
+</form>
