@@ -1,0 +1,29 @@
+<h1 class="title">Equipment Profile Groups Management</h1>
+  <h2 class="subtitle">
+    Manage equipment profile groups of the cluster<br>
+  </h2>
+
+
+<a class="button" href="/inventory/groups/equipment_profile/add.html">
+  <span class="icon is-small"><i class="fa fa-play"></i></span><span>Add equipment profile group</span>
+</a>
+<a class="button" href="/inventory/groups/equipment_profile/remove.html">
+  <span class="icon is-small"><i class="fa fa-play"></i></span><span>Remove equipment profile group</span>
+</a>
+<br>
+<br>
+<br>
+{% if (equipment_profile_groups_data | length) == 0 %}
+			<div class="notification is-warning">
+			  <strong>No equipment profile groups detected</strong>.<br>
+			</div>
+{% endif %}
+{% for ep in equipment_profile_groups_data %}
+<a href="/inventory/groups/equipment_profile/manage.html">
+      <div class="card">
+        <div class="card-header"><p class="card-header-title">{{ ep }}</p></div>
+        <div class="card-content"><div class="content">Description: {{ equipment_profile_groups_data[ep]['description'] }}</div></div>
+      </div>
+      <br />
+</a>
+{% endfor %}

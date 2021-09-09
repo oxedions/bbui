@@ -1,0 +1,59 @@
+<h1 class="title">Add nodes</h1>
+  <h2 class="subtitle">
+    Add nodes<br>
+  </h2>
+
+<form action="/inventory/nodes/index.html" method="POST" id="nodes_add_form">
+
+  <div class="field">
+    <label class="label">Enter new master group name:</label>
+    <div class="control has-icons-left">
+      <input class="input" type="text" placeholder="Text input" id="add_master_group_name" name="add_master_group_name">
+      <span class="icon is-small is-left">
+        <i class="fas fa-seedling"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Enter master group description, as a reminder:</label>
+    <div class="control has-icons-left">
+      <input class="input" type="text" placeholder="Text input" id="add_master_group_description" name="add_master_group_description" value="This is a generic group...">
+      <span class="icon is-small is-left">
+        <i class="fas fa-seedling"></i>
+      </span>
+    </div>
+  </div>
+
+      <input class="input" type="text" placeholder="Text input" id="add_master_group_description" name="add_master_group_description" value="This is a generic group...">
+
+
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-link">Submit</button>
+    </div>
+  </div>
+
+ </form>
+
+<button onClick="add_node_to_form()">
+      + Add node
+</button>
+<script>
+
+    var id_inc = 1;
+
+    function add_node_to_form() {
+
+    var node_name_input = document.createElement("input");
+    node_name_input.setAttribute("class", "input");
+    node_name_input.setAttribute("type", "text");
+    node_name_input.setAttribute("name", "FullName");
+    node_name_input.setAttribute("id", "toto"+id_inc.toString());
+    document.getElementById("nodes_add_form").appendChild(node_name_input);
+
+    window.id_inc++;
+    console.log(window.id_inc);
+    }
+
+</script>
