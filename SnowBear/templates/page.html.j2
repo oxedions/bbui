@@ -1,0 +1,63 @@
+{% macro field_select(label,id,elements,selected) %}
+<div class="field">
+  <label class="label">{{ label }}</label>
+  <div class="control">
+    <div class="select">
+      <select id="{{ id }}" name="{{ id }}">
+{% for element in elements %}
+{% if selected == element %}
+        <option selected>{{ element }}</option>
+{% else %}
+        <option>{{ element }}</option>
+{% endif %}
+{% endfor %}
+      </select>
+    </div>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro field_input(label,id,placeholder,value) %}
+<div class="field">
+  <label class="label">{{ label }}</label>
+  <div class="control">
+    <input class="input" type="text" id="{{ id }}" name="{{ id }}" {% if placeholder is not none %}placeholder="{{ placeholder }}"{% endif %} {% if value is not none %}value="{{ value }}"{% endif %}>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro field_textarea(label,id,placeholder,value) %}
+<div class="field">
+  <label class="label">{{ label }}</label>
+  <div class="control">
+    <textarea class="textarea" id="{{ id }}" name="{{ id }}" {% if placeholder is not none %}placeholder="{{ placeholder }}"{% endif %}>{{ value }}</textarea>
+  </div>
+</div>
+{% endmacro %}
+
+
+
+
+{% include "page/head.html" with context %}
+<body>
+
+{% include "page/navbar.html" with context %}
+
+<section class="main-content columns is-fullheight">
+
+{% if page_left_menu is defined %}
+{% include page_left_menu with context %}
+{% endif %}
+
+  <div class="container column is-9">
+    <div class="section">
+
+{% include page_content_path with context %}
+
+    </div>
+  </div>
+
+</section>
+
+</body>
+{% include "page/foot.html" with context %}

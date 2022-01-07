@@ -1,0 +1,34 @@
+<!--
+###################################################
+NAVBAR
+-->
+<nav class="navbar is-dark has-shadow">
+  <div class="navbar-brand">
+    <a href="#/" class="navbar-item router-link-active"><img src="{{ url_for('static', filename='images/bluebanquise_logo_white.svg') }}" alt="BlueBanquise UI"></a>
+    <div data-target="navbarExampleTransparentExample" class="navbar-burger burger"><span></span> <span></span> <span></span>
+    </div>
+  </div>
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a href="/" class="navbar-item">Home</a>
+      {% for element in page_navigation_data %}
+        {% if element.sub_navigation is defined and element.sub_navigation %}
+          <div class="navbar-item has-dropdown is-hoverable">
+            <div class="navbar-link">{{ element.text }}</div>
+            <div class="navbar-dropdown is-boxed">
+              {% for sub_element in element.sub_navigation %}
+                {% if sub_element.name == 'navbar-divider' %}
+                  <hr class="navbar-divider">
+                {% else %}
+                  <a href="{{ sub_element.link }}" class="navbar-item">{{ sub_element.text }}</a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+        TOTO
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</nav>

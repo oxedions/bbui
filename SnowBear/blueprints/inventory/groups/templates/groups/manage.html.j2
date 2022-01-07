@@ -1,0 +1,24 @@
+<h1 class="title">Manage Custom Group</h1>
+
+
+<form action="/inventory/groups/index.html?custom_group={{custom_group}}" method="POST">
+
+  <h2 class="subtitle">
+    Description:<br>
+  </h2>
+
+{{ field_textarea("Use the following field to set group description:","manage_custom_group_description","Variables here in YAML.",custom_group_data['description']) }}
+
+  <h2 class="subtitle">
+    Custom variables:<br>
+  </h2>
+
+{{ field_textarea("Use the following field to set group custom variables (YAML syntax):","manage_custom_group_variables","Variables here in YAML.",custom_group_variables) }}
+
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-link">Submit</button>
+    </div>
+  </div>
+
+</form>

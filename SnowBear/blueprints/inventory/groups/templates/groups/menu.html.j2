@@ -1,0 +1,33 @@
+  <!--
+  ###################################################
+  LEFT MENU
+  -->
+  <aside class="column is-3 is-narrow-mobile is-fullheight section is-hidden-mobile">
+    <p class="menu-label is-hidden-touch">Custom groups</p>
+    <ul class="menu-list">
+      <li>
+        <a href="/inventory/groups/index.html" class="{% if left_menu_active == 'index' %}is-active{% endif %}">
+          <span class="icon"><i class="fas fa-layer-group"></i></span>Groups list
+        </a>
+      </li>
+      <li>
+        <ul>
+          <li>
+            <a href="/inventory/groups/add.html" class="{% if left_menu_active == 'add' %}is-active{% endif %}">
+              <span class="icon"><i class="fas fa-object-group"></i></span>Add group
+            </a>
+          </li>
+          <li>
+            <a href="/inventory/groups/remove.html" class="{% if left_menu_active == 'remove' %}is-active{% endif %}">
+              <span class="icon"><i class="fas fa-object-group"></i></span>Remove group
+            </a>
+          </li>
+          <li>
+            <a href="#" class="{% if left_menu_active == 'manage' %}is-active{% endif %} has-text-light">
+              <span class="icon"><i class="fas fa-object-group"></i></span>Manage group
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </aside>
