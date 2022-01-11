@@ -1,0 +1,20 @@
+<h1 class="title">Add equipment profile</h1>
+  <h2 class="subtitle">
+    Add a new equipment profile to cluster.<br>
+  </h2>
+
+<form action="/inventory/equipment/index.html" method="POST">
+
+{{ field_input("Enter equipment name:","add_equipment_name","Text input",none) }}
+
+{{ field_textarea("Enter equipment description:","add_equipment_description","Text input","This is a generic equipment...") }}
+
+{{ fields(equipment_variables) }}
+
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-link">Submit</button>
+    </div>
+  </div>
+
+ </form>

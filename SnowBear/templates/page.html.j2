@@ -35,6 +35,48 @@
 </div>
 {% endmacro %}
 
+{% macro fields(variables) %}
+{% for variable in variables %}
+  {% if variable['type'] == 'select' %}
+      <div class="field">
+        <label class="label">{{ variable['label'] }}</label>
+        {{ variable['description'] }}
+        <div class="control">
+          <div class="select">
+            <select id="{{ variable['name'] }}" name="{{ variable['name'] }}">
+      {% for element in variable['values'] %}
+      {% if variable['default_value'] == element %}
+              <option selected>{{ element }}</option>
+      {% else %}
+              <option>{{ element }}</option>
+      {% endif %}
+      {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+  {% elif variable['type'] ==  'input' %}
+      <div class="field">
+        <label class="label">{{ variable['label'] }}</label>
+        {{ variable['description'] }}
+        <div class="control">
+          <input class="input" type="text" id="{{ variable['name'] }}" name="{{ variable['name'] }}" {% if variable['placeholder'] is not none %}placeholder="{{ variable['placeholder'] }}"{% endif %} {% if variable['default_value'] is not none %}value="{{ variable['default_value'] }}"{% endif %}>
+        </div>
+      </div>
+  {% elif variable['type'] ==  'textarea' %}
+      <div class="field">
+        <label class="label">{{ variable['label'] }}</label>
+        {{ variable['description'] }}
+        <div class="control">
+          <textarea class="textarea" id="{{ variable['name'] }}" name="{{ variable['name'] }}" {% if placehvariable['placeholder'] is not none %}placeholder="{{ variable['placeholder'] }}"{% endif %}>{% if variable['default_value'] is not none %}{{ variable['default_value'] }}{% endif %}</textarea>
+        </div>
+      </div>
+  {% elif variable['type'] ==  'title' %}
+      <br><br>
+      <h{{ variable['level'] }} class="subtitle is-{{ variable['level'] }}">{{ variable['default_value'] }}</h{{ variable['level'] }}>
+  {% endif %}
+{% endfor %}
+{% endmacro %}
 
 
 

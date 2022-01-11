@@ -1,0 +1,102 @@
+
+- type: title
+  default_value: Type
+  level: 4
+- name: ep_equipment_type
+  type: input
+  default_value:
+  description: Type of the equipment. 'server' for a PXE able host, anything else or empty as desired for others.
+  label: Equipment type
+
+- type: title
+  default_value: iPXE and EFI configuration
+  level: 4
+- name: ep_ipxe_driver
+  type: select
+  values:
+    - default
+    - snp
+    - snponly
+  default_value: default
+  description: Refer to http://ipxe.org/appnote/buildtargets. If the iPXE rom does not load properly, use snponly.
+  label: iPXE driver
+- name: ep_ipxe_platform
+  type: select
+  values:
+    - efi
+    - pcbios
+  default_value: efi
+  description: pcbios (for legacy/bios old hardware) or efi for recent hardware.
+  label: iPXE platforme
+- name: ep_ipxe_embed
+  type: select
+  values:
+    - standard
+    - dhcpretry
+    - noshell
+  default_value: standard
+  description: Refer to BlueBanquise documentation. Use dhcpretry when issues with slow switch port up.
+  label: iPXE embed script
+- name: ep_preserve_efi_first_boot_device
+  type: select
+  values:
+    - true
+    - false
+  default_value: true
+  description: Restore EFI first boot after grub installation.
+  label: Preserve EFI first boot
+
+- type: title
+  default_value: Kernel parameters
+  level: 4
+- name: ep_console
+  type: input
+  default_value:
+  description: Console parameters to be passed to kernel.
+  label: Console
+- name: ep_kernel_parameters
+  type: input
+  default_value:
+  description: Parameters to be passed to kernel.
+  label: Kernel parameters
+
+- type: title
+  default_value: Security
+  level: 4
+- name: ep_access_control
+  type: input
+  default_value: enforcing
+  description: "Access control level. For SELinux based systems: enforcing, permissive, or disabled"
+  label: Access Control
+- name: ep_firewall
+  type: select
+  values:
+    - true
+    - false
+  default_value: true
+  description: Enable or disable system firewall.
+  label: Firewall
+
+- type: title
+  default_value: Operating system
+  level: 4
+- name: ep_operating_system_distribution
+  type: select
+  values:
+    - centos
+    - redhat
+    - rockylinux
+    - ubuntu
+  default_value: rockylinux
+  description: Select Linux operating system distribution
+  label: Distribution
+- name: ep_operatin_system_distribution_major_version
+  type: input
+  default_value: 8
+  description: "Distribution major version. 20 for Ubuntu 20.04, 8 for RHEL 8.4, etc."
+  label: Distribution major version
+- name: ep_operatin_system_distribution_version
+  type: input
+  default_value: 8.5
+  description: "Distribution version. 20.04 for Ubuntu 20.04, 8.4 for RHEL 8.4, etc."
+  label: Distribution version (optional)

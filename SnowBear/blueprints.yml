@@ -6,9 +6,9 @@
      - name: groups
        text: Groups
        link: /inventory/groups/index.html
-     - name: equipments
-       text: Equipments
-       link: /inventory/equipments/index.html
+     - name: equipment
+       text: Equipment
+       link: /inventory/equipment/index.html
      - name: navbar-divider
 #- path: blueprints.nodes.main
 #  blueprint: nodes
