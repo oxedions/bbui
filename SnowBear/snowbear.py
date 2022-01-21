@@ -15,12 +15,15 @@ import subprocess
 from subprocess import Popen, PIPE
 import time
 from flask import Flask, render_template, request, redirect, jsonify
+import os.path
+from os import path
 import re
 import os
 import yaml
 import json
 import importlib
 from functions.bbui import load_yaml,dump_yaml,load_page_navigation_data
+
 
 app = Flask(__name__)
 
@@ -44,9 +47,16 @@ for navigation in page_navigation_data:
         app.register_blueprint(getattr(module, navigation['name']))
 print('')
 
-@app.route("/")
+@app.route("/", methods=["GET","POST"])
 def index():
-    return render_template("page.html.j2", page_content_path="home/index.html.j2", page_title="Home", page_navigation_data=page_navigation_data)
+    if request.method== "POST":
+      full_path=request.form.get("full_path")
+      if (path.exists(str(full_path))):
+        return render_template("page.html.j2", page_content_path="home/index.html.j2", page_title="Home", page_navigation_data=page_navigation_data, path_check="Given path exists and will be used")
+      #check if the path exists 
+      print("checked"+full_path)
+      return render_template("page.html.j2", page_content_path="home/index.html.j2", page_title="Home", page_navigation_data=page_navigation_data, path_check="Given path does not exist")
+    return render_template("page.html.j2", page_content_path="home/index.html.j2", page_title="Home", page_navigation_data=page_navigation_data, path_check="Please enter a path")
 
 if __name__ == '__main__':
 

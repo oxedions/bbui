@@ -1,0 +1,29 @@
+<h1 class="title">Network Management</h1>
+  <h2 class="subtitle">
+    Manage cluster networks<br>
+  </h2>
+
+
+<a class="button" href="/inventory/equipment/add.html">
+  <span class="icon is-small"><i class="fa fa-play"></i></span><span>Add equipment profile</span>
+</a>
+<a class="button" href="/inventory/equipment/remove.html">
+  <span class="icon is-small"><i class="fa fa-play"></i></span><span>Remove equipment profile</span>
+</a>
+<br>
+<br>
+<br>
+{% if (equipment_groups_data | length) == 0 %}
+			<div class="notification is-warning">
+			  <strong>No equipment profiles detected</strong>.<br>
+			</div>
+{% endif %}
+{% for mg in equipment_groups_data %}
+<a href="/inventory/equipment/manage.html?custom_equipment={{ mg }}">
+      <div class="card">
+        <div class="card-header"><p class="card-header-title">{{ mg }}</p></div>
+        <div class="card-content"><div class="content">{{ equipment_groups_data[mg]['description'] }}</div></div>
+      </div>
+      <br />
+</a>
+{% endfor %}

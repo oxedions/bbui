@@ -1,1 +1,39 @@
 BlueBanquise WebUI
+
+<h1 class="title">Bluebanquise configuration folder</h1>
+<h2 class="subtitle">Please enter full path to the configuration folder<br></h2>
+  
+
+<form action="/" method="POST">
+  {# <div class="field"> #}
+  <label class="label">Enter path</label>
+  <div class="columns">
+    <div class="column">
+      <div class="control">
+        <input class="input" type="text" id="full_path" name="full_path">
+      </div>
+    </div>
+  {# </div> #}
+    <div class="column">
+      {% if path_check=='Given path exists and will be used' %}
+      <div class="icon-text has-text-success">
+        <span class="icon has-text-success"><i class="fas fa-check-square"></i></span>
+        <span> Success </span>
+      </div>
+      {% elif path_check=='Given path does not exist' %}
+      <div class="icon-text has-text-danger ">
+        <span class="icon has-text-danger"><i class="fas fa-ban"></i></span>
+        <span> Fail </span>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="box">
+    {{ path_check | default('Not checked') }}
+  </div> 
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-link">Submit</button>
+    </div>
+  </div>
+</form>
