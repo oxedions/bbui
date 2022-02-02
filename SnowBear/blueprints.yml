@@ -6,10 +6,13 @@
      - name: groups
        text: Groups
        link: /inventory/groups/index.html
+     - name: navbar-divider
      - name: equipment
        text: Equipment
        link: /inventory/equipment/index.html
-     - name: navbar-divider
+     - name: tim
+       text: Tim rocks
+       link: /inventory/tim/index.html
 #- path: blueprints.nodes.main
 #  blueprint: nodes
 #- path: blueprints.initialize.main

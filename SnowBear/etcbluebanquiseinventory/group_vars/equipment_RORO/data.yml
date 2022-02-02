@@ -1,0 +1,13 @@
+ep_access_control: enforcing
+ep_console: aaaaaaaaa
+ep_equipment_type: aaaa
+ep_firewall: 'True'
+ep_ipxe_driver: default
+ep_ipxe_embed: standard
+ep_ipxe_platform: efi
+ep_kernel_parameters: ''
+ep_operatin_system_distribution_major_version: '8'
+ep_operatin_system_distribution_version: '8.5'
+ep_operating_system_distribution: redhat
+ep_preserve_efi_first_boot_device: 'True'
+equipment_description: This is a generic equipment...

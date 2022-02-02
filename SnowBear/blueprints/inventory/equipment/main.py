@@ -12,6 +12,17 @@ page_navigation_data = load_yaml('blueprints.yml')
 @equipment.route("/inventory/equipment/index.html", methods = ['GET', 'POST'])
 def inventory_equipment_index():
 
+    if request.method == 'POST':
+        print(request.form)
+        if "add_equipment_name" in request.form: # From add
+            folder_exist = os.path.exists('etcbluebanquiseinventory/group_vars/equipment_'+request.form.get('add_equipment_name'))
+            if not folder_exist:
+                os.makedirs('etcbluebanquiseinventory/group_vars/equipment_'+request.form.get('add_equipment_name'))
+                buffer_dict = request.form.to_dict()
+                del(buffer_dict['add_equipment_name'])
+                dump_yaml('etcbluebanquiseinventory/group_vars/equipment_'+request.form.get('add_equipment_name')+'/data.yml',buffer_dict)
+                os.close(os.open('etcbluebanquiseinventory/group_vars/equipment_'+request.form.get('add_equipment_name')+'/variables.yml', os.O_CREAT))
+
     # Gather list of existing equipment groups
     equipment_groups_data = {}
     for folder in os.listdir("etcbluebanquiseinventory/group_vars/"):
