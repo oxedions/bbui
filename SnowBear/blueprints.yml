@@ -10,9 +10,10 @@
      - name: equipment
        text: Equipment
        link: /inventory/equipment/index.html
-     - name: tim
-       text: Tim rocks
-       link: /inventory/tim/index.html
+     - name: network
+       text: Network
+       link: /inventory/network/index.html
+     - name: navbar-divider
 #- path: blueprints.nodes.main
 #  blueprint: nodes
 #- path: blueprints.initialize.main
