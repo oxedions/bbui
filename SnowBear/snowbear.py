@@ -22,7 +22,8 @@ import os
 import yaml
 import json
 import importlib
-from functions.bbui import load_yaml,dump_yaml,load_page_navigation_data
+from functions.bbui import load_yaml,dump_yaml,load_page_navigation_data,update_yaml
+
 
 
 app = Flask(__name__)
@@ -47,19 +48,22 @@ for navigation in page_navigation_data:
         app.register_blueprint(getattr(module, navigation['name']))
 print('')
 
+
 @app.route("/", methods=["GET","POST"])
 def index():
     if request.method== "POST":
       full_path=request.form.get("full_path")
-      if (path.exists(str(full_path))):
-        return render_template("page.html.j2", page_content_path="home/index.html.j2", page_title="Home", page_navigation_data=page_navigation_data, path_check="Given path exists and will be used")
       #check if the path exists 
+      if (path.exists(str(full_path))):
+        update_yaml("general_settings.yml",['general_settings','root_path'],str(full_path))
+        return render_template("page.html.j2", page_content_path="home/index.html.j2", page_title="Home", page_navigation_data=page_navigation_data, path_check="Given path exists and will be used")
       print("checked"+full_path)
       return render_template("page.html.j2", page_content_path="home/index.html.j2", page_title="Home", page_navigation_data=page_navigation_data, path_check="Given path does not exist")
     return render_template("page.html.j2", page_content_path="home/index.html.j2", page_title="Home", page_navigation_data=page_navigation_data, path_check="Please enter a path")
 
 if __name__ == '__main__':
-
+    print("loading configuration with the following parameters:")
+    print(load_yaml("general_settings.yml"))
     print('''
                              _.--""""--.._
                          _.""    ."       `-._
