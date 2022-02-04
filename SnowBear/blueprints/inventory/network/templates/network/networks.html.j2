@@ -1,0 +1,78 @@
+
+
+<h1 class="title">Networks management</h1>
+  <h2 class="subtitle">
+    Manage networks<br>
+  </h2> 
+
+<button class="js-modal-trigger button is-primary" data-target="modal1">
+  Open Documentation
+</button>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/modal.js') }}"></script>
+
+<div class="tabs is-centered">
+  <ul>
+    <li class="is-active"><a href="/inventory/network/networks.html">List</a></li>
+    <li><a href="/inventory/network/network_add.html">Add</a></li>
+    <li><a>Test</a></li>
+    <li><a>Test</a></li>
+  </ul>
+</div>
+
+{% for net in network_list %}
+<div class="dropdown">
+  <div class="dropdown-trigger">
+    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2">
+      <span>{{net}}</span>
+      <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+    <div class="dropdown-content">
+      <pre> 
+    subnet : {{network_list[net]['subnet'] | default('none')}} 
+    prefix : {{network_list[net]['prefix'] | default('none')}} 
+    netmask : {{network_list[net]['netmask'] | default('none')}} 
+    broadcast : {{network_list[net]['broadcast'] | default('none')}} 
+    dhcp_unknown_range : {{network_list[net]['dhcp_unknown_range'] | default('none')}} 
+    gateway : {{network_list[net]['gateway'] | default('none')}} 
+    is_in_dhcp : {{network_list[net]['is_in_dhcp'] | default('none')}} 
+    is_in_dns : {{network_list[net]['is_in_dns'] | default('none')}} 
+    {% if network_list[net]['services_ip'] is defined %}
+    services_ip :
+       pxe_ip: {{network_list[net]['services_ip']['pxe_ip'] | default('none')}} 
+       dns_ip: {{network_list[net]['services_ip']['pxe_ip'] | default('none')}} 
+       repository_ip: {{network_list[net]['services_ip']['pxe_ip'] | default('none')}} 
+       authentication_ip: {{network_list[net]['services_ip']['pxe_ip'] | default('none')}} 
+       time_ip: {{network_list[net]['services_ip']['pxe_ip'] | default('none')}} 
+       log_ip: {{network_list[net]['services_ip']['pxe_ip'] | default('none')}} 
+      </pre>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+<div id="modal1" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Modal title</p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <!-- Content ... -->
+      <p>test</p>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success">Save changes</button>
+      <button class="button">Cancel</button>
+    </footer>
+  </div>
+</div>
+

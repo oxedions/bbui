@@ -1,0 +1,16 @@
+
+<aside class="column is-3 is-narrow-mobile is-fullheight section is-hidden-mobile">
+  <p class="menu-label">
+    Networks
+  </p>
+  <ul class="menu-list">
+    <li><a href="/inventory/network/networks.html" {% if left_menu_active == "networks" %}is-active{% endif %}>Manage networks</a></li>
+  </ul>
+  <p class="menu-label">
+    NICS
+  </p>
+  <ul class="menu-list">
+    <li><a {% if left_menu_active == "nics" %}is-active{% endif %}>Manage NICS</a></li>
+  </ul>
+</aside>
+
