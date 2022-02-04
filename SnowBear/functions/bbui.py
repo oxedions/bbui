@@ -23,9 +23,18 @@ def load_yaml(filename):
 def dump_yaml(filename,yaml_data):
     logging.info(bcolors.OKBLUE+'Dumping YAML '+filename+bcolors.ENDC)
     with open(filename, 'w') as f:
-        f.write(yaml.dump(yaml_data))
+        f.write(yaml.dump(yaml_data, default_flow_style=False))
     return 0
 
+def merge_default_current(default_dict,current_dict):
+    updated_dict = default_dict
+    if current_dict is not None:
+        for num, item in enumerate(default_dict, start=0):
+            print(num)
+            if 'default_value' in item:
+                if item['name'] in current_dict:
+                    updated_dict[num]['default_value'] = current_dict[item['name']]
+    return updated_dict
 
 def Merge(dict1, dict2):
     res = {**dict1, **dict2}

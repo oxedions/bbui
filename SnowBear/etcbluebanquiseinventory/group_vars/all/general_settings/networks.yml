@@ -1,0 +1,29 @@
+networks:
+  coucou:
+    description: "coucou\r\n"
+    is_in_dhcp: 'True'
+    pxe_ip: 10.10.0.0
+    repositories_ip: 10.10.0.0
+    subnet: 10.10.0.0
+    test.add_network_name: coucou
+  hahah:
+    description: hh
+    is_in_dhcp: 'True'
+    pxe_ip: 10.10.0.0
+    repositories_ip: 10.10.0.0
+    subnet: 10.10.0.0
+    test.add_network_name: huhu
+  testo:
+    description: rien
+    is_in_dhcp: 'True'
+    pxe_ip: 10.10.0.0
+    repositories_ip: 10.10.0.0
+    subnet: 10.10.0.0
+    test.add_network_name: coucou
+  tyty:
+    description: aa
+    is_in_dhcp: 'True'
+    pxe_ip: 10.10.0.0
+    repositories_ip: 10.10.0.0
+    subnet: 10.10.0.0
+    test.add_network_name: tata

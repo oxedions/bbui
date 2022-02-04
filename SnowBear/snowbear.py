@@ -48,6 +48,9 @@ for navigation in page_navigation_data:
         app.register_blueprint(getattr(module, navigation['name']))
 print('')
 
+print(' * Importing parameters' )
+module = importlib.import_module('blueprints.parameters.main', package='app')
+app.register_blueprint(getattr(module, 'parameters'))
 
 @app.route("/", methods=["GET","POST"])
 def index():

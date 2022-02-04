@@ -1,6 +1,6 @@
 
 - type: title
-  default_value: Type
+  value: Type
   level: 4
 - name: ep_equipment_type
   type: input
@@ -9,7 +9,7 @@
   label: Equipment type
 
 - type: title
-  default_value: iPXE and EFI configuration
+  value: iPXE and EFI configuration
   level: 4
 - name: ep_ipxe_driver
   type: select
@@ -47,7 +47,7 @@
   label: Preserve EFI first boot
 
 - type: title
-  default_value: Kernel parameters
+  value: Kernel parameters
   level: 4
 - name: ep_console
   type: input
@@ -61,7 +61,7 @@
   label: Kernel parameters
 
 - type: title
-  default_value: Security
+  value: Security
   level: 4
 - name: ep_access_control
   type: input
@@ -78,7 +78,7 @@
   label: Firewall
 
 - type: title
-  default_value: Operating system
+  value: Operating system
   level: 4
 - name: ep_operating_system_distribution
   type: select

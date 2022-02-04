@@ -1,0 +1,31 @@
+{% if flags.event == "added" %}
+<div class="notification is-success">
+  Network added.
+</div>
+{% endif %}
+
+<h1 class="title">Cluster Networks</h1>
+
+<a class="button" href="/inventory/networks/add.html">
+  <span class="icon is-small"><i class="fa fa-play"></i></span><span>Add network</span>
+</a>
+<a class="button" href="/inventory/networks/remove.html">
+  <span class="icon is-small"><i class="fa fa-play"></i></span><span>Remove network</span>
+</a>
+<br>
+<br>
+<br>
+{% if (networks_data | length) == 0 %}
+			<div class="notification is-warning">
+			  <strong>No networks configured.</strong><br>
+			</div>
+{% endif %}
+{% for network in networks_data['networks'] %}
+<a href="/inventory/networks/manage.html?network={{ network }}">
+      <div class="card">
+        <div class="card-header"><p class="card-header-title">{{ network }}</p></div>
+        <div class="card-content"><div class="content">{{ networks_data['networks']['description'] }}</div></div>
+      </div>
+      <br />
+</a>
+{% endfor %}

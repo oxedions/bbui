@@ -1,0 +1,19 @@
+{% if flags.updated %}
+<div class="notification is-success">
+  Parameters updated.
+</div>
+{% endif %}
+
+<h1 class="title">Parameters</h1>
+
+<form action="/parameters/index.html" method="POST">
+
+{{ fields(parameters_variables) }}
+
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-link">Submit</button>
+    </div>
+  </div>
+
+ </form>

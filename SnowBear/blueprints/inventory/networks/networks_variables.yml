@@ -1,0 +1,39 @@
+
+- type: title
+  value: Global network settings
+  level: 4
+- name: description
+  type: textarea
+  default_value:
+  description:
+  label: Network description
+  placeholder: toto
+- name: subnet
+  type: input
+  default_value: 10.10.0.0
+  description:
+  label: Network subnet
+- name: is_in_dhcp
+  type: select
+  values:
+    - true
+    - false
+  default_value: true
+  description:
+  label: Is in dhcp server
+- type: title
+  value: Services ip
+  level: 4
+- name: services_ip
+  type: dict
+  sub:
+    - name: pxe_ip
+      type: input
+      default_value: 10.10.0.0
+      description:
+      label: pxe_server ip
+    - name: repositories_ip
+      type: input
+      default_value: 10.10.0.0
+      description:
+      label: repositories http server ip

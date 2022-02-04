@@ -1,0 +1,21 @@
+- type: title
+  value: Application paths
+  level: 4
+- name: inventory_path
+  type: input
+  default_value: etcbluebanquiseinventory/
+  description:
+  label: Working inventory path.
+- name: snowbear_data_path
+  type: input
+  default_value: varlibsnowbear/
+  description:
+  label: SnowBear data path.
+- type: title
+  value: UI theme
+  level: 4
+- name: ui_theme
+  type: input
+  default_value: lumia
+  description:
+  label: Default WebUI CSS theme

@@ -1,0 +1,20 @@
+<h1 class="title">Add network</h1>
+  <h2 class="subtitle">
+    Add a new network to cluster.<br>
+  </h2>
+
+<form action="/inventory/networks/index.html" method="POST">
+
+{{ field_input("Enter network name:","add_network_name","Text input",none) }}
+
+{{ field_input("Enter network name:","test.add_network_name","Text input",none) }}
+
+{{ fields(networks_variables,0) }}
+
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-link">Submit</button>
+    </div>
+  </div>
+
+ </form>

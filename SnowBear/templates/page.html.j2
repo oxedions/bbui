@@ -35,12 +35,16 @@
 </div>
 {% endmacro %}
 
-{% macro fields(variables) %}
+{% macro fields(variables,padding) %}
 {% for variable in variables %}
   {% if variable['type'] == 'select' %}
       <div class="field">
+        {% if variable['label'] is defined and variable['label'] is not none %}
         <label class="label">{{ variable['label'] }}</label>
+        {% endif %}
+        {% if variable['description'] is defined and variable['description'] is not none %}
         {{ variable['description'] }}
+        {% endif %}
         <div class="control">
           <div class="select">
             <select id="{{ variable['name'] }}" name="{{ variable['name'] }}">
@@ -55,25 +59,38 @@
           </div>
         </div>
       </div>
-  {% elif variable['type'] ==  'input' %}
+  {% elif variable['type'] == 'input' %}
       <div class="field">
+        {% if variable['label'] is defined and variable['label'] is not none %}
         <label class="label">{{ variable['label'] }}</label>
+        {% endif %}
+        {% if variable['description'] is defined and variable['description'] is not none %}
         {{ variable['description'] }}
+        {% endif %}
         <div class="control">
           <input class="input" type="text" id="{{ variable['name'] }}" name="{{ variable['name'] }}" {% if variable['placeholder'] is not none %}placeholder="{{ variable['placeholder'] }}"{% endif %} {% if variable['default_value'] is not none %}value="{{ variable['default_value'] }}"{% endif %}>
         </div>
       </div>
-  {% elif variable['type'] ==  'textarea' %}
+  {% elif variable['type'] == 'textarea' %}
       <div class="field">
+        {% if variable['label'] is defined and variable['label'] is not none %}
         <label class="label">{{ variable['label'] }}</label>
+        {% endif %}
+        {% if variable['description'] is defined and variable['description'] is not none %}
         {{ variable['description'] }}
+        {% endif %}
         <div class="control">
-          <textarea class="textarea" id="{{ variable['name'] }}" name="{{ variable['name'] }}" {% if placehvariable['placeholder'] is not none %}placeholder="{{ variable['placeholder'] }}"{% endif %}>{% if variable['default_value'] is not none %}{{ variable['default_value'] }}{% endif %}</textarea>
+          <textarea class="textarea" id="{{ variable['name'] }}" name="{{ variable['name'] }}" {% if variable['placeholder'] is not none %}placeholder="{{ variable['placeholder'] }}"{% endif %}>{% if variable['default_value'] is not none %}{{ variable['default_value'] }}{% endif %}</textarea>
         </div>
       </div>
-  {% elif variable['type'] ==  'title' %}
+  {% elif variable['type'] == 'title' %}
       <br><br>
-      <h{{ variable['level'] }} class="subtitle is-{{ variable['level'] }}">{{ variable['default_value'] }}</h{{ variable['level'] }}>
+      <h{{ variable['level'] }} class="subtitle is-{{ variable['level'] }}">{{ variable['value'] }}</h{{ variable['level'] }}>
+  {% elif variable['type'] == 'dict' %}
+      <div  align="left" style="padding-left: {{ padding + 5 }}%">
+      {{ fields(variable['sub'],padding + 5) }}
+      </div>
+      <br>
   {% endif %}
 {% endfor %}
 {% endmacro %}
