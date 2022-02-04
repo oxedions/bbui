@@ -17,11 +17,11 @@
 </div>
 {% endmacro %}
 
-{% macro field_input(label,id,placeholder,value) %}
+{% macro field_input(label,id,placeholder,value,modifier,attribute) %}
 <div class="field">
   <label class="label">{{ label }}</label>
   <div class="control">
-    <input class="input" type="text" id="{{ id }}" name="{{ id }}" {% if placeholder is not none %}placeholder="{{ placeholder }}"{% endif %} {% if value is not none %}value="{{ value }}"{% endif %}>
+    <input class="input{% if modifier is not none %} {{ modifier }}{% endif %}" type="text" id="{{ id }}" name="{{ id }}" {% if placeholder is not none %}placeholder="{{ placeholder }}"{% endif %} {% if value is not none %}value="{{ value }}"{% endif %}{% if attribute is not none %} {{ attribute }}{% endif %}>
   </div>
 </div>
 {% endmacro %}
@@ -35,7 +35,15 @@
 </div>
 {% endmacro %}
 
-{% macro fields(variables,padding) %}
+{% macro fields(variables, padding, padding_add, path) %}
+{#
+This macro displays an automated form.
+The macro supports multiplexing data.
+* variables contains list of elements of the form
+* padding should be 0 at fields() invocations as it is used for nested dicts
+* padding_add depend of desired design, 0 by default, it is used for nested dicts
+* path should bt "" at fields() invocation as it is used to multiplex nested dicts
+#}
 {% for variable in variables %}
   {% if variable['type'] == 'select' %}
       <div class="field">
@@ -47,7 +55,7 @@
         {% endif %}
         <div class="control">
           <div class="select">
-            <select id="{{ variable['name'] }}" name="{{ variable['name'] }}">
+            <select id="{{ variable['name'] }}" name="{{ path + variable['name'] }}">
       {% for element in variable['values'] %}
       {% if variable['default_value'] == element %}
               <option selected>{{ element }}</option>
@@ -68,7 +76,7 @@
         {{ variable['description'] }}
         {% endif %}
         <div class="control">
-          <input class="input" type="text" id="{{ variable['name'] }}" name="{{ variable['name'] }}" {% if variable['placeholder'] is not none %}placeholder="{{ variable['placeholder'] }}"{% endif %} {% if variable['default_value'] is not none %}value="{{ variable['default_value'] }}"{% endif %}>
+          <input class="input" type="text" id="{{ variable['name'] }}" name="{{ path + variable['name'] }}" {% if variable['placeholder'] is not none %}placeholder="{{ variable['placeholder'] }}"{% endif %} {% if variable['default_value'] is not none %}value="{{ variable['default_value'] }}"{% endif %}>
         </div>
       </div>
   {% elif variable['type'] == 'textarea' %}
@@ -80,15 +88,15 @@
         {{ variable['description'] }}
         {% endif %}
         <div class="control">
-          <textarea class="textarea" id="{{ variable['name'] }}" name="{{ variable['name'] }}" {% if variable['placeholder'] is not none %}placeholder="{{ variable['placeholder'] }}"{% endif %}>{% if variable['default_value'] is not none %}{{ variable['default_value'] }}{% endif %}</textarea>
+          <textarea class="textarea" id="{{ variable['name'] }}" name="{{ path + variable['name'] }}" {% if variable['placeholder'] is not none %}placeholder="{{ variable['placeholder'] }}"{% endif %}>{% if variable['default_value'] is not none %}{{ variable['default_value'] }}{% endif %}</textarea>
         </div>
       </div>
   {% elif variable['type'] == 'title' %}
       <br><br>
       <h{{ variable['level'] }} class="subtitle is-{{ variable['level'] }}">{{ variable['value'] }}</h{{ variable['level'] }}>
   {% elif variable['type'] == 'dict' %}
-      <div  align="left" style="padding-left: {{ padding + 5 }}%">
-      {{ fields(variable['sub'],padding + 5) }}
+      <div  align="left" style="padding-left: {{ padding + padding_add }}%">
+      {{ fields(variable['sub'], padding + padding_add, padding_add, path + variable['name'] + '.') }}
       </div>
       <br>
   {% endif %}

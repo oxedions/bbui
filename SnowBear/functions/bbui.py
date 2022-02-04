@@ -27,14 +27,28 @@ def dump_yaml(filename,yaml_data):
     return 0
 
 def merge_default_current(default_dict,current_dict):
+    # supports any nested levels
     updated_dict = default_dict
     if current_dict is not None:
         for num, item in enumerate(default_dict, start=0):
-            print(num)
+            if item['type'] == 'dict':
+                updated_dict[num]['sub'] = merge_default_current(default_dict[num]['sub'],current_dict[item['name']])
             if 'default_value' in item:
                 if item['name'] in current_dict:
                     updated_dict[num]['default_value'] = current_dict[item['name']]
     return updated_dict
+
+def demultiplex(dict1):
+    # supports only one nested level for now
+    buffer_dict =  dict1.copy()
+    for key, value in dict1.items():
+        print(key)
+        if "." in key:
+            del(buffer_dict[key])
+            if not key.split('.')[0] in buffer_dict:
+                buffer_dict[key.split('.')[0]] = {}
+            buffer_dict[key.split('.')[0]][key.split('.')[1]] = value
+    return buffer_dict
 
 def Merge(dict1, dict2):
     res = {**dict1, **dict2}

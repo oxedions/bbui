@@ -3,14 +3,19 @@
   Network added.
 </div>
 {% endif %}
+{% if flags.event == "modified" %}
+<div class="notification is-success">
+  Network modified.
+</div>
+{% endif %}
 
 <h1 class="title">Cluster Networks</h1>
 
 <a class="button" href="/inventory/networks/add.html">
-  <span class="icon is-small"><i class="fa fa-play"></i></span><span>Add network</span>
+  <span class="icon is-small"><i class="fas fa-plus"></i></span><span>Add network</span>
 </a>
 <a class="button" href="/inventory/networks/remove.html">
-  <span class="icon is-small"><i class="fa fa-play"></i></span><span>Remove network</span>
+  <span class="icon is-small"><i class="fas fa-trash-alt"></i></span><span>Remove network</span>
 </a>
 <br>
 <br>
@@ -21,10 +26,10 @@
 			</div>
 {% endif %}
 {% for network in networks_data['networks'] %}
-<a href="/inventory/networks/manage.html?network={{ network }}">
+<a href="/inventory/networks/manage.html?managed_network={{ network }}">
       <div class="card">
-        <div class="card-header"><p class="card-header-title">{{ network }}</p></div>
-        <div class="card-content"><div class="content">{{ networks_data['networks']['description'] }}</div></div>
+        <div class="card-header"><p class="card-header-title"><span class="icon is-small"><i class="fas fa-network-wired"></i></span>&nbsp;&nbsp;{{ network }}</p></div>
+        <div class="card-content"><div class="content">{{ networks_data['networks'][network]['description'] }}</div></div>
       </div>
       <br />
 </a>

@@ -1,11 +1,11 @@
-<h1 class="title">Add network</h1>
+<h1 class="title">Manage network</h1>
   <h2 class="subtitle">
-    Add a new network to cluster.<br>
+    {{ managed_network }}<br>
   </h2>
 
 <form action="/inventory/networks/index.html" method="POST">
 
-{{ field_input("Enter network name:","add_network_name","Text input",none,none,none) }}
+{{ field_input("Network name:","managed_network_name",none,managed_network,"is-static","readonly") }}
 
 {{ fields(networks_variables,0,0,"") }}
 
