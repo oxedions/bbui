@@ -1,3 +1,21 @@
+<style>
+input[name="accordion-select"], .panel-block {
+  display: none;
+}
+label.panel-heading {
+  cursor: pointer;
+  display: block;
+}
+
+/* the magic */
+#panel-1:checked ~ .panel > .body-1,
+#panel-2:checked ~ .panel > .body-2,
+#panel-3:checked ~ .panel > .body-3 {
+  display: flex;
+}
+</style>
+
+
 
 
 <h1 class="title">Networks management</h1>
@@ -5,12 +23,17 @@
     Manage networks<br>
   </h2> 
 
+
+
 <button class="js-modal-trigger button is-primary" data-target="modal1">
   Open Documentation
 </button>
 
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/modal.js') }}"></script>
+
+
+
 
 <div class="tabs is-centered">
   <ul>
@@ -23,6 +46,15 @@
 
 
 
+{% if is_success == "true" %}
+<section class="hero is-small is-success">
+  <div class="hero-body">
+    <p class="title">
+      Success
+    </p>
+  </div>
+</section>
+{% endif %}
 
 <div id="modal1" class="modal">
   <div class="modal-background"></div>
@@ -41,4 +73,305 @@
     </footer>
   </div>
 </div>
+
+<form action="/inventory/network/network_add.html" method="POST">
+
+<div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">network identifier</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input required name="network_identifier" class="input is-danger" type="text" placeholder="ice1-1">
+          </div>
+          <p class="help is-danger">
+            This field is required
+          </p>
+        </div>
+      </div>
+</div>
+
+
+<input type="radio" id="panel-1" name="accordion-select">
+<input type="radio" id="panel-2" name="accordion-select">
+<input type="radio" id="panel-3" name="accordion-select">
+<div class="panel">
+  <label class="panel-heading" for="panel-1">General Settings</label>
+  <div class="panel-block body-1">
+
+    
+    <ul>
+
+    <li>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">subnet</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input name="subnet" minlength="7" required maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.0.0">
+          </div>
+          <p class="help is-danger">
+            This field is required
+          </p>
+        </div>
+      </div>
+    </div>
+    </li>
+
+
+    <li>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">prefix</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input name="prefix" required minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="255.255.0.0">
+          </div>
+          <p class="help is-danger">
+            This field is required
+          </p>
+        </div>
+      </div>
+    </div>
+    </li>
+
+    <li>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">broadcast</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input name="broadcast" required minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.255.255">
+          </div>
+          <p class="help is-danger">
+            This field is required
+          </p>
+        </div>
+      </div>
+    </div>
+    </li>
+    
+    <li>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">dhcp_unknown_range</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input name="dhcp_unknown_range" required class="input is-danger" type="text" placeholder="10.10.254.1 10.10.254.254">
+          </div>
+          <p class="help is-danger">
+            This field is required
+          </p>
+        </div>
+      </div>
+    </div>
+    </li>
+
+    <li>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">gateway</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input name="gateway" required minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.2.1">
+          </div>
+          <p class="help is-danger">
+            This field is required
+          </p>
+        </div>
+      </div>
+    </div>
+    </li>
+    
+    <li>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">is_in_dhcp</label>
+      </div>
+      <div class="field-body">
+        <div class="field is-narrow">
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select name="is_in_dhcp" required>
+                <option>true</option>
+                <option>false</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </li>
+   
+
+
+    <li>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">is_in_dns</label>
+      </div>
+      <div class="field-body">
+        <div class="field is-narrow">
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select name="is_in_dns" required>
+                <option>true</option>
+                <option>false</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </li>
+  </ul>
+
+
+
+
+
+  </div>
+</div>
+<div class="panel">
+  <label class="panel-heading" for="panel-2">Services settings</label>
+  <div class="panel-block body-2">
+    
+    
+    <ul>
+    <li>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">pxe_ip</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input name="pxe_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.0.1">
+          </div>
+          <p class="help is-danger">
+            This field is required
+          </p>
+        </div>
+      </div>
+    </div>
+    </li>
+    
+    <li>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">dns_ip</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input name="dns_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.0.1">
+          </div>
+          <p class="help is-danger">
+            This field is required
+          </p>
+        </div>
+      </div>
+    </div>
+    </li>
+
+    <li>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">repository_ip</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input name="reposiory_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.0.1">
+          </div>
+          <p class="help is-danger">
+            This field is required
+          </p>
+        </div>
+      </div>
+    </div>
+    </li>
+    
+    <li>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">authentication_ip</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input name="authentication_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.0.1">
+          </div>
+          <p class="help is-danger">
+            This field is required
+          </p>
+        </div>
+      </div>
+    </div>
+    </li>
+
+    
+    
+  
+    <li>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">time_ip</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input name="time_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.0.1">
+          </div>
+          <p class="help is-danger">
+            This field is required
+          </p>
+        </div>
+      </div>
+    </div>
+    </li>
+    
+    <li>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">log_ip</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input name="log_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.0.1">
+          </div>
+          <p class="help is-danger">
+            This field is required
+          </p>
+        </div>
+      </div>
+    </div>
+    </li>
+
+    
+  </ul>
+
+  </div>
+</div>
+
+<div class="field is-grouped">
+    <div class="control">
+      <button class="button is-success is-outlined is-fullwidth">Add network</button>
+    </div>
+  </div>
+
+
+</form>
 
