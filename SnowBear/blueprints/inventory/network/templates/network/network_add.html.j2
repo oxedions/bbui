@@ -39,8 +39,8 @@ label.panel-heading {
   <ul>
     <li><a href="/inventory/network/networks.html">List</a></li>
     <li class="is-active"><a>Add</a></li>
-    <li><a>Test</a></li>
-    <li><a>Test</a></li>
+    <li><a>Delete</a></li>
+    <li><a>Modify</a></li>
   </ul>
 </div>
 
@@ -55,6 +55,17 @@ label.panel-heading {
   </div>
 </section>
 {% endif %}
+
+{% if is_success == "false" %}
+<section class="hero is-small is-danger">
+  <div class="hero-body">
+    <p class="title">
+      An error occured
+    </p>
+  </div>
+</section>
+{% endif %}
+
 
 <div id="modal1" class="modal">
   <div class="modal-background"></div>
@@ -97,7 +108,7 @@ label.panel-heading {
 <input type="radio" id="panel-2" name="accordion-select">
 <input type="radio" id="panel-3" name="accordion-select">
 <div class="panel">
-  <label class="panel-heading" for="panel-1">General Settings</label>
+  <label class="panel-heading" for="panel-1">General Settings <i class="fas fa-arrow-down"></i></label>
   <div class="panel-block body-1">
 
     
@@ -244,7 +255,7 @@ label.panel-heading {
   </div>
 </div>
 <div class="panel">
-  <label class="panel-heading" for="panel-2">Services settings</label>
+  <label class="panel-heading" for="panel-2">Services settings <i class="fas fa-arrow-down"></i></label>
   <div class="panel-block body-2">
     
     

@@ -69,16 +69,23 @@ def inventory_network_network_add():
             yaml_buffer['networks'][network_identifier] = {'subnet': subnet, 'prefix': prefix, 'netmask': netmask, 'broadcast': broadcast, 'dhcp_unknown_range': dhcp_unknown_range, 'gateway': gateway, 'is_in_dhcp': is_in_dhcp, 'is_in_dns': is_in_dns, 'services_ip': {'pxe_ip': pxe_ip, 'dns_ip': dns_ip, 'repository_ip': repository_ip, 'authentication_ip': authentication_ip, 'time_ip': time_ip, 'log_ip': log_ip}}
 
             dump_yaml(absolute_path+"/group_vars/all/general_settings/network.yml",yaml_buffer)
-
+            return render_template("page.html.j2", \
+            page_content_path="network/network_add.html.j2", \
+            page_title="Inventory - network list", \
+            page_navigation_data=page_navigation_data, \
+            page_left_menu="network/menu.html.j2", left_menu_active="networks", \
+            is_success="true", \
+            )
         except: 
-            print("error")
-        return render_template("page.html.j2", \
-        page_content_path="network/network_add.html.j2", \
-        page_title="Inventory - network list", \
-        page_navigation_data=page_navigation_data, \
-        page_left_menu="network/menu.html.j2", left_menu_active="networks", \
-        is_success="true", \
-        )
+            return render_template("page.html.j2", \
+            page_content_path="network/network_add.html.j2", \
+            page_title="Inventory - network list", \
+            page_navigation_data=page_navigation_data, \
+            page_left_menu="network/menu.html.j2", left_menu_active="networks", \
+            is_success="false", \
+            )
+
+        
     absolute_path=load_yaml("general_settings.yml")["general_settings"]["root_path"]
     network_list=load_yaml(absolute_path+"/group_vars/all/general_settings/network.yml")
     return render_template("page.html.j2", \
