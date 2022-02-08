@@ -25,10 +25,8 @@ def inventory_network_networks():
     absolute_path=load_yaml("general_settings.yml")["general_settings"]["root_path"]
     if (os.path.isfile(absolute_path+"/group_vars/all/general_settings/network.yml") == True):
         print(absolute_path+"/group_vars/all/general_settings/network.yml")
-        print("it exists")
         network_list=load_yaml(absolute_path+"/group_vars/all/general_settings/network.yml")["networks"]
     else:
-        print("does not exist")
         open((absolute_path+"/group_vars/all/general_settings/network.yml"), 'a').close()
         dump_yaml(absolute_path+"/group_vars/all/general_settings/network.yml",{'domain_name': 'tumulus.local', 'networks': {'ice1-1': {'subnet': '10.10.0.0', 'prefix': 16, 'netmask': '255.255.0.0', 'broadcast': '10.10.255.255', 'dhcp_unknown_range': '10.10.254.1 10.10.254.254', 'gateway': '10.10.2.1', 'is_in_dhcp': True, 'is_in_dns': True, 'services_ip': {'pxe_ip': '10.10.0.1', 'dns_ip': '10.10.0.1', 'repository_ip': '10.10.0.1', 'authentication_ip': '10.10.0.1', 'time_ip': '10.10.0.1', 'log_ip': '10.10.0.1'}}}})
         network_list=load_yaml(absolute_path+"/group_vars/all/general_settings/network.yml")["networks"]
@@ -91,6 +89,40 @@ def inventory_network_network_add():
     return render_template("page.html.j2", \
     page_content_path="network/network_add.html.j2", \
     page_title="Inventory - network list", \
+    page_navigation_data=page_navigation_data, \
+    page_left_menu="network/menu.html.j2", left_menu_active="networks", \
+    )
+
+@network.route("/inventory/network/network_delete.html", methods = ['GET', 'POST'])
+def inventory_network_delete():
+    absolute_path=load_yaml("general_settings.yml")["general_settings"]["root_path"]
+    if request.method== "POST":
+        try:
+            network=request.form.get("network")
+            
+            network_list=load_yaml(absolute_path+"/group_vars/all/general_settings/network.yml")["networks"]
+            yaml_buffer = load_yaml(absolute_path+"/group_vars/all/general_settings/network.yml")
+            x = yaml_buffer['networks'].pop(network)
+            dump_yaml(absolute_path+"/group_vars/all/general_settings/network.yml",yaml_buffer)
+            
+        except:
+            print("error")
+
+    network_list=load_yaml(absolute_path+"/group_vars/all/general_settings/network.yml")["networks"]
+
+    return render_template("page.html.j2", \
+    page_content_path="network/network_delete.html.j2", \
+    page_title="Inventory - network delete", \
+    page_navigation_data=page_navigation_data, \
+    page_left_menu="network/menu.html.j2", left_menu_active="networks", \
+    network_list=network_list, \
+    )
+
+@network.route("/inventory/network/network_modify.html", methods = ['GET', 'POST'])
+def inventory_network_modify():
+    return render_template("page.html.j2", \
+    page_content_path="network/network_modify.html.j2", \
+    page_title="Inventory - network modify", \
     page_navigation_data=page_navigation_data, \
     page_left_menu="network/menu.html.j2", left_menu_active="networks", \
     )

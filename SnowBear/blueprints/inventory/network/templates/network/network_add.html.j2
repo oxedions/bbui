@@ -38,9 +38,9 @@ label.panel-heading {
 <div class="tabs is-centered">
   <ul>
     <li><a href="/inventory/network/networks.html">List</a></li>
-    <li class="is-active"><a>Add</a></li>
-    <li><a>Delete</a></li>
-    <li><a>Modify</a></li>
+    <li class="is-active"><a href="/inventory/network/network_add.html">Add</a></li>
+    <li><a href="/inventory/network/network_delete.html">Delete</a></li>
+    <li><a href="/inventory/network/network_modify.html">Modify</a></li>
   </ul>
 </div>
 
@@ -89,12 +89,12 @@ label.panel-heading {
 
 <div class="field is-horizontal">
       <div class="field-label is-normal">
-        <label class="label">network identifier</label>
+        <label class="label">Network identifier</label>
       </div>
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input required name="network_identifier" class="input is-danger" type="text" placeholder="ice1-1">
+            <input required name="network_identifier" class="input   " type="text" placeholder="ice1-1">
           </div>
           <p class="help is-danger">
             This field is required
@@ -122,7 +122,7 @@ label.panel-heading {
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input name="subnet" minlength="7" required maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.0.0">
+            <input name="subnet" minlength="7" required maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input   " type="text" placeholder="10.10.0.0">
           </div>
           <p class="help is-danger">
             This field is required
@@ -141,7 +141,7 @@ label.panel-heading {
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input name="prefix" required minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="255.255.0.0">
+            <input name="prefix" required minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input   " type="text" placeholder="255.255.0.0">
           </div>
           <p class="help is-danger">
             This field is required
@@ -159,7 +159,7 @@ label.panel-heading {
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input name="broadcast" required minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.255.255">
+            <input name="broadcast" required minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input   " type="text" placeholder="10.10.255.255">
           </div>
           <p class="help is-danger">
             This field is required
@@ -177,7 +177,7 @@ label.panel-heading {
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input name="dhcp_unknown_range" required class="input is-danger" type="text" placeholder="10.10.254.1 10.10.254.254">
+            <input name="dhcp_unknown_range" required class="input   " type="text" placeholder="10.10.254.1 10.10.254.254">
           </div>
           <p class="help is-danger">
             This field is required
@@ -195,7 +195,7 @@ label.panel-heading {
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input name="gateway" required minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.2.1">
+            <input name="gateway" required minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input   " type="text" placeholder="10.10.2.1">
           </div>
           <p class="help is-danger">
             This field is required
@@ -268,10 +268,10 @@ label.panel-heading {
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input name="pxe_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.0.1">
-          </div>
-          <p class="help is-danger">
-            This field is required
+            <input name="pxe_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input  " type="text" placeholder="10.10.0.1">
+          </di v>
+          <p class="help  ">
+            This field is optional
           </p>
         </div>
       </div>
@@ -286,10 +286,10 @@ label.panel-heading {
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input name="dns_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.0.1">
+            <input name="dns_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input  " type="text" placeholder="10.10.0.1">
           </div>
-          <p class="help is-danger">
-            This field is required
+          <p class="help  ">
+            This field is optional
           </p>
         </div>
       </div>
@@ -304,10 +304,10 @@ label.panel-heading {
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input name="reposiory_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.0.1">
+            <input name="reposiory_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input  " type="text" placeholder="10.10.0.1">
           </div>
-          <p class="help is-danger">
-            This field is required
+          <p class="help  ">
+            This field is optional
           </p>
         </div>
       </div>
@@ -322,10 +322,10 @@ label.panel-heading {
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input name="authentication_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.0.1">
+            <input name="authentication_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input  " type="text" placeholder="10.10.0.1">
           </div>
-          <p class="help is-danger">
-            This field is required
+          <p class="help  ">
+            This field is optional
           </p>
         </div>
       </div>
@@ -343,10 +343,10 @@ label.panel-heading {
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input name="time_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.0.1">
+            <input name="time_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input  " type="text" placeholder="10.10.0.1">
           </div>
-          <p class="help is-danger">
-            This field is required
+          <p class="help  ">
+            This field is optional
           </p>
         </div>
       </div>
@@ -361,10 +361,10 @@ label.panel-heading {
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <input name="log_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input is-danger" type="text" placeholder="10.10.0.1">
+            <input name="log_ip" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="input  " type="text" placeholder="10.10.0.1">
           </div>
-          <p class="help is-danger">
-            This field is required
+          <p class="help  ">
+            This field is optional
           </p>
         </div>
       </div>
@@ -381,7 +381,7 @@ label.panel-heading {
     <div class="control">
       <button class="button is-success is-outlined is-fullwidth">Add network</button>
     </div>
-  </div>
+</div>
 
 
 </form>
