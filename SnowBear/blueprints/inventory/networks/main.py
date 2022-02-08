@@ -2,7 +2,7 @@ import os
 import re
 import yaml
 from flask import Blueprint, render_template, request
-from functions.bbui import load_yaml,dump_yaml,demultiplex,merge_default_current
+from functions.bbui import load_yaml,dump_yaml,demultiplex,merge_default_current,form_as_dict
 
 networks = Blueprint('networks', __name__, template_folder='templates')
 
@@ -21,6 +21,9 @@ def inventory_networks_index():
 
     flags={'event': None}
     if request.method == 'POST':
+        out=form_as_dict(request.form.to_dict())
+        print(out)
+        quit()
         buffer_dict = demultiplex(request.form.to_dict())
         print(buffer_dict)
         if 'add_network_name' in  buffer_dict:

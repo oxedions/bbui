@@ -1,5 +1,9 @@
+from cgi import test
+from turtle import title
 import yaml
 import logging
+import json
+import re
 
 # Colors, from https://stackoverflow.com/questions/287871/how-to-print-colored-text-in-terminal-in-python
 class bcolors:
@@ -49,6 +53,76 @@ def demultiplex(dict1):
                 buffer_dict[key.split('.')[0]] = {}
             buffer_dict[key.split('.')[0]][key.split('.')[1]] = value
     return buffer_dict
+
+def mergearrays(dict1):
+    buffer_dict = {}
+    for key, value in dict1.items():
+        if not "[" in key:
+            buffer_dict[key] = value
+        else:
+            merge_subarrays(buffer_dict,key,value)
+
+            #for num, sub_key in enumerate(key.split('['),start=1):
+            if key.split('[')[1] == ']': # List
+                if 
+            else: # Dict
+
+
+            key.split('[')[0].replace(']','').replace("'","").replace('"','')
+                
+
+def merge_subarrays(dict,key,value):
+    if not "[" in key:
+        dict[key] = value
+    else:
+        if key.split('[')[1] == ']': # List
+            if type(dict) is list: # List exist, adding value
+                if len(key.split('[')) == 2: # Final list
+                    dict.extend(value)
+                else:
+                    dict.extend(merge_subarrays({},key.replace(key.split('[')[0],'',1))
+        else: # Dict
+
+# services_ip['pxe_ip']
+# user ['arthur'] ['name']
+# {"user":{"arthur":{"name":"value"}}}
+# user['arthur']['phones'][0]=toto
+# user['names'][0]['phones']=toto
+
+def form_as_dict(dict1):
+    buffer_dict = {}
+    for key, value in dict1.items():
+        print(key)
+        if not "[" in key:
+            buffer_dict[key] = value
+        else:
+            json_string = ""
+            json_revert_string = ""
+            for num, sub_key in enumerate(key.split('['),start=1):
+                if sub_key.replace(']','').replace("'","").replace('"','').isnumeric():
+                    #if num == len(key.split('[')):
+                    json_string = json_string + '['
+                    json_revert_string = ']' + json_revert_string
+                else:
+                    json_string = json_string + '{"' + sub_key.replace(']','').replace("'","").replace('"','') + '":'
+                    json_revert_string = '}' + json_revert_string
+            json_string = json_string + '"' + value + '"' + json_revert_string
+            #for i in key.split('['):
+            #    json_string = json_string + '}'
+            print(json_string)
+            buffer_dict = MergeDictList(buffer_dict,json.loads(json_string))
+#            if re.search("\[[0-9]*\]",key) is not None:
+
+    return buffer_dict
+
+def MergeDictList(dict1, dict2):
+   ''' Merge dictionaries and keep values keys in list'''
+   dict3 = {**dict1, **dict2}
+   for key, value in dict3.items():
+       if key in dict1 and key in dict2 and type(value) is list:
+               value.extend(dict1[key])
+               dict3[key] = value
+   return dict3
 
 def Merge(dict1, dict2):
     res = {**dict1, **dict2}

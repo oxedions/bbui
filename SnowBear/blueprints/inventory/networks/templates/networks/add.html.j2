@@ -7,6 +7,16 @@
 
 {{ field_input("Enter network name:","add_network_name","Text input",none,none,none) }}
 
+{{ field_input("bmc_name","bmc['name']","Text input",none,none,none) }}
+{{ field_input("bmc_net","bmc['network']","Text input",none,none,none) }}
+{{ field_input("bmc_ip","bmc['ip4']","Text input",none,none,none) }}
+{{ field_input("bmc_mac","bmc['mac']","Text input",none,none,none) }}
+{{ field_input("network_interfaces_name","network_interfaces[0]['name']","Text input",none,none,none) }}
+{{ field_input("network_interfaces_net","network_interfaces[0]['network']","Text input",none,none,none) }}
+{{ field_input("network_interfaces_name1","network_interfaces[1]['name']","Text input",none,none,none) }}
+{{ field_input("network_interfaces_net1","network_interfaces[1]['network']","Text input",none,none,none) }}
+
+
 {{ fields(networks_variables,0,0,"") }}
 
   <div class="field is-grouped">
