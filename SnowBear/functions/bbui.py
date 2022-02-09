@@ -54,34 +54,76 @@ def demultiplex(dict1):
             buffer_dict[key.split('.')[0]][key.split('.')[1]] = value
     return buffer_dict
 
-def mergearrays(dict1):
+def mergearrays(dict_in):
+    '''
+        This function merge an ImmutableMultiDict from an HTML form POST
+        based on PHP/Ruby standard forms array styntax. It replaces enctype="application/json"
+        without need of Javascript.
+
+        in: dict_in as ImmutableMultiDict type
+        out: buffer_dict as dict type
+    '''
+    dict1=dict_in.to_dict(flat=False)
     buffer_dict = {}
     for key, value in dict1.items():
-        if not "[" in key:
-            buffer_dict[key] = value
-        else:
-            merge_subarrays(buffer_dict,key,value)
+        print('key ' + key)
+        if len(value) == 1:
+            value = value[0]
+        print(value)
+        print(buffer_dict)
+        merge_subarrays(buffer_dict,key,value)
+    return buffer_dict
 
-            #for num, sub_key in enumerate(key.split('['),start=1):
-            if key.split('[')[1] == ']': # List
-                if 
-            else: # Dict
-
-
-            key.split('[')[0].replace(']','').replace("'","").replace('"','')
-                
-
-def merge_subarrays(dict,key,value):
-    if not "[" in key:
-        dict[key] = value
+def merge_subarrays(dict1,key,value):
+    if not "[" in key: # End of main key
+        dict1[key] = value
     else:
-        if key.split('[')[1] == ']': # List
-            if type(dict) is list: # List exist, adding value
-                if len(key.split('[')) == 2: # Final list
-                    dict.extend(value)
-                else:
-                    dict.extend(merge_subarrays({},key.replace(key.split('[')[0],'',1))
+        current_key = key.split('[')[0]
+        print('current key ' + current_key)
+        if key.split('[')[1] == ']': # End list
+            print('this is an end list')
+            # user['arthur']['phone'][] -> phone[]
+            if not current_key in dict1:
+                dict1[current_key] = []
+            if type(value) is list:
+                dict1[current_key].extend(value)
+            else:
+                dict1[current_key].append(value)
+        elif key.split('[')[1].replace(']','').replace("'",'').replace('"','').isnumeric(): # List
+            list_index = key.split('[')[1].replace(']','').replace("'",'').replace('"','')
+            if not current_key in dict1:
+                dict1[current_key] = []
+            # user['arthur']['phone'][0]  -> phone[0] (called end list)
+            # user['arthur']['phone'][0]['other']  -> phone[0]['other']
+            if len(key.split('[')) == 2: # End list
+                # phone[0]
+                dict1[current_key]=list_extend_and_add(dict1[current_key],int(list_index),value)
+            else: # Not end list, so dict
+                # phone[0]['other']
+                next_key = key.replace(current_key,'',1) # [0]['other']
+                next_key = re.sub('\[','', next_key,count=1) # 0]['other']
+                next_key = re.sub('[0-9]+\]','', next_key,count=1) # ['other']
+                next_key = re.sub('\[[\'"]','', next_key,count=1) # other']
+                next_key = re.sub('[\'"]\]','', next_key,count=1) # other
+
+                if (len(dict1[current_key]) - 1) >= int(list_index): # Entry already exist, update it
+                    list_extend_and_add(dict1[current_key],int(list_index),merge_subarrays(dict1[current_key][int(list_index)],next_key,value))
+                else: # Entry does not exist, create it with empty dict (cannot be a list since we are already in a list)
+                    list_extend_and_add(dict1[current_key],int(list_index),merge_subarrays({},next_key,value))
         else: # Dict
+            # user['arthur']['phone']
+            next_key = key.replace(current_key,'',1) # ['arthur']['phone']
+            next_key = re.sub('\[[\'"]','', next_key,count=1) # arthur']['phone']
+            next_key = re.sub('[\'"]\]','', next_key,count=1) # arthur['phone']
+            if not current_key in dict1:
+                dict1[current_key] = {}
+            merge_subarrays(dict1[current_key],next_key,value)
+    return dict1
+
+def list_extend_and_add(list1, index, value):
+    list1.extend([None] * ((max(index.start, index.stop - 1) if isinstance(index, slice) else index) - len(list1) + 1))
+    list1[index]=value
+    return list1
 
 # services_ip['pxe_ip']
 # user ['arthur'] ['name']

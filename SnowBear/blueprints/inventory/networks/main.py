@@ -2,7 +2,7 @@ import os
 import re
 import yaml
 from flask import Blueprint, render_template, request
-from functions.bbui import load_yaml,dump_yaml,demultiplex,merge_default_current,form_as_dict
+from functions.bbui import load_yaml,dump_yaml,demultiplex,merge_default_current,form_as_dict,mergearrays
 
 networks = Blueprint('networks', __name__, template_folder='templates')
 
@@ -23,6 +23,9 @@ def inventory_networks_index():
     if request.method == 'POST':
         out=form_as_dict(request.form.to_dict())
         print(out)
+        print("START")
+        print(request.form.to_dict(flat=False))
+        dump_yaml('etcbluebanquiseinventory/group_vars/all/general_settings/networks2.yml',mergearrays(request.form))
         quit()
         buffer_dict = demultiplex(request.form.to_dict())
         print(buffer_dict)

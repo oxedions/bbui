@@ -1,0 +1,22 @@
+add_network_name: test1
+bmc:
+  ips:
+  - 99.99.99.91
+  - 99.99.99.92
+  macs:
+  - null
+  - AA
+  - BB
+  - CC
+  network: '8888'
+description: ''
+is_in_dhcp: 'True'
+network_interfaxes:
+- ip: 10.10.0.1
+  name: eno1
+- ip: 10.10.0.2
+  name: eno2
+services_ip.pxe_ip: 10.10.0.0
+services_ip.repositories_ip: 10.10.0.0
+subnet: 10.10.0.0
+toto: '7777'

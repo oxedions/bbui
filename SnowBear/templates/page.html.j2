@@ -57,7 +57,7 @@ The macro supports multiplexing data.
           <div class="select">
             <select id="{{ variable['name'] }}" name="{{ path + variable['name'] }}">
       {% for element in variable['values'] %}
-      {% if variable['default_value'] == element %}
+      {% if variable['default_value'] == (element|string) %}{# added string filter to prevent issues with True/False parsed as booleans #}
               <option selected>{{ element }}</option>
       {% else %}
               <option>{{ element }}</option>

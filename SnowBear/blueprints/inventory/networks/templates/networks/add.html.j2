@@ -7,14 +7,20 @@
 
 {{ field_input("Enter network name:","add_network_name","Text input",none,none,none) }}
 
-{{ field_input("bmc_name","bmc['name']","Text input",none,none,none) }}
+{{ field_input("toto","toto","Text input",none,none,none) }}
 {{ field_input("bmc_net","bmc['network']","Text input",none,none,none) }}
-{{ field_input("bmc_ip","bmc['ip4']","Text input",none,none,none) }}
-{{ field_input("bmc_mac","bmc['mac']","Text input",none,none,none) }}
-{{ field_input("network_interfaces_name","network_interfaces[0]['name']","Text input",none,none,none) }}
-{{ field_input("network_interfaces_net","network_interfaces[0]['network']","Text input",none,none,none) }}
-{{ field_input("network_interfaces_name1","network_interfaces[1]['name']","Text input",none,none,none) }}
-{{ field_input("network_interfaces_net1","network_interfaces[1]['network']","Text input",none,none,none) }}
+{{ field_input("bmc_ips1","bmc['ips'][]","Text input",none,none,none) }}
+{{ field_input("bmc_ips2","bmc['ips'][]","Text input",none,none,none) }}
+{{ field_input("bmc_mac1","bmc['macs'][1]","Text input",none,none,none) }}
+{{ field_input("bmc_mac3","bmc['macs'][3]","Text input",none,none,none) }}
+{{ field_input("bmc_mac2","bmc['macs'][2]","Text input",none,none,none) }}
+{{ field_input("NIC1_name","network_interfaxes[0]['name']","Text input",none,none,none) }}
+{{ field_input("NIC1_ip","network_interfaxes[0]['ip']","Text input",none,none,none) }}
+{{ field_input("NIC2_name","network_interfaxes[1]['name']","Text input",none,none,none) }}
+{{ field_input("NIC2_ip","network_interfaxes[1]['ip']","Text input",none,none,none) }}
+
+
+
 
 
 {{ fields(networks_variables,0,0,"") }}
