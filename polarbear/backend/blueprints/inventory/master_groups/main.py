@@ -13,12 +13,11 @@ polarbear_parameters = load_yaml(os.path.join(etc_path,'parameters.yml'))
 @master_groups.route("/v1/inventory/master_groups", methods = ['GET'])
 def inventory_master_groups_index():
 
-    
     # Gather list of existing groups that are not all or equipment_ or mg_
     master_groups_data = {}
-    for folder in os.listdir(polarbear_parameters.inventory_path + "etcbluebanquiseinventory/group_vars/"):
+    for folder in os.listdir(polarbear_parameters['inventory_path'] + "/group_vars/"):
         if re.match('^mg_.*', folder):
-             yaml_buffer = load_yaml('etcbluebanquiseinventory/group_vars/' + folder + '/data.yml')
+             yaml_buffer = load_yaml(polarbear_parameters['inventory_path'] + "/group_vars/" + folder + "/data.yml")
              master_groups_data[folder] = yaml_buffer
 
-    return jsonify(polarbear_parameters), 200
+    return jsonify(master_groups_data), 200
