@@ -1,0 +1,27 @@
+{% if flags.status == "updated" %}
+<div class="notification is-success">
+  Parameters updated.
+</div>
+{% elif flags.status == "error" %}
+<div class="notification is-danger">
+  Parameters update failed. Check application logs to investigate.
+</div>
+{% endif %}
+
+<h1 class="title">PolarBear application parameters</h1>
+
+Settings here are related to PolarBear web interface, and not BlueBanquise stack.
+
+<form action="/parameters" method="POST">
+
+{{ fields(parameters_variables,0,0,"") }}
+
+<br>
+<br>
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-link">Submit</button>
+    </div>
+  </div>
+
+ </form>

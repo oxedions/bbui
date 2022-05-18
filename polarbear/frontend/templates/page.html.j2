@@ -1,0 +1,130 @@
+{% macro field_select(label,id,elements,selected) %}
+<div class="field">
+  <label class="label">{{ label }}</label>
+  <div class="control">
+    <div class="select">
+      <select id="{{ id }}" name="{{ id }}">
+{% for element in elements %}
+{% if selected == element %}
+        <option selected>{{ element }}</option>
+{% else %}
+        <option>{{ element }}</option>
+{% endif %}
+{% endfor %}
+      </select>
+    </div>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro field_input(label,id,placeholder,value,modifier,attribute) %}
+<div class="field">
+  <label class="label">{{ label }}</label>
+  <div class="control">
+    <input class="input{% if modifier is not none %} {{ modifier }}{% endif %}" type="text" id="{{ id }}" name="{{ id }}" {% if placeholder is not none %}placeholder="{{ placeholder }}"{% endif %} {% if value is not none %}value="{{ value }}"{% endif %}{% if attribute is not none %} {{ attribute }}{% endif %}>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro field_textarea(label,id,placeholder,value) %}
+<div class="field">
+  <label class="label">{{ label }}</label>
+  <div class="control">
+    <textarea class="textarea" id="{{ id }}" name="{{ id }}" {% if placeholder is not none %}placeholder="{{ placeholder }}"{% endif %}>{{ value }}</textarea>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro fields(variables, padding, padding_add, path) %}
+{#
+This macro displays an automated form.
+The macro supports multiplexing data.
+* variables contains list of elements of the form
+* padding should be 0 at fields() invocations as it is used for nested dicts
+* padding_add depend of desired design, 0 by default, it is used for nested dicts
+* path should bt "" at fields() invocation as it is used to multiplex nested dicts
+#}
+{% for variable in variables %}
+  {% if variable['type'] == 'select' %}
+      <div class="field">
+        {% if variable['label'] is defined and variable['label'] is not none %}
+        <label class="label">{{ variable['label'] }}</label>
+        {% endif %}
+        {% if variable['description'] is defined and variable['description'] is not none %}
+        {{ variable['description'] }}
+        {% endif %}
+        <div class="control">
+          <div class="select">
+            <select id="{{ variable['name'] }}" name="{{ path + variable['name'] }}">
+      {% for element in variable['values'] %}
+      {% if variable['default_value'] == (element|string) %}{# added string filter to prevent issues with True/False parsed as booleans #}
+              <option selected>{{ element }}</option>
+      {% else %}
+              <option>{{ element }}</option>
+      {% endif %}
+      {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+  {% elif variable['type'] == 'input' %}
+      <div class="field">
+        {% if variable['label'] is defined and variable['label'] is not none %}
+        <label class="label">{{ variable['label'] }}</label>
+        {% endif %}
+        {% if variable['description'] is defined and variable['description'] is not none %}
+        {{ variable['description'] }}
+        {% endif %}
+        <div class="control">
+          <input class="input" type="text" id="{{ variable['name'] }}" name="{{ path + variable['name'] }}" {% if variable['placeholder'] is not none %}placeholder="{{ variable['placeholder'] }}"{% endif %} {% if variable['default_value'] is not none %}value="{{ variable['default_value'] }}"{% endif %}>
+        </div>
+      </div>
+  {% elif variable['type'] == 'textarea' %}
+      <div class="field">
+        {% if variable['label'] is defined and variable['label'] is not none %}
+        <label class="label">{{ variable['label'] }}</label>
+        {% endif %}
+        {% if variable['description'] is defined and variable['description'] is not none %}
+        {{ variable['description'] }}
+        {% endif %}
+        <div class="control">
+          <textarea class="textarea" id="{{ variable['name'] }}" name="{{ path + variable['name'] }}" {% if variable['placeholder'] is not none %}placeholder="{{ variable['placeholder'] }}"{% endif %}>{% if variable['default_value'] is not none %}{{ variable['default_value'] }}{% endif %}</textarea>
+        </div>
+      </div>
+  {% elif variable['type'] == 'title' %}
+      <br><br>
+      <h{{ variable['level'] }} class="subtitle is-{{ variable['level'] }}">{{ variable['value'] }}</h{{ variable['level'] }}>
+  {% elif variable['type'] == 'dict' %}
+      <div  align="left" style="padding-left: {{ padding + padding_add }}%">
+      {{ fields(variable['sub'], padding + padding_add, padding_add, path + variable['name'] + '.') }}
+      </div>
+      <br>
+  {% endif %}
+{% endfor %}
+{% endmacro %}
+
+
+
+{% include "page/head.html" with context %}
+<body>
+
+{% include "page/navbar.html" with context %}
+
+<section class="main-content columns is-fullheight">
+
+{% if page_left_menu is defined %}
+{% include page_left_menu with context %}
+{% endif %}
+
+  <div class="container column is-9">
+    <div class="section">
+
+{% include page_content_path with context %}
+
+    </div>
+  </div>
+
+</section>
+
+</body>
+{% include "page/foot.html" with context %}

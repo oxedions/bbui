@@ -1,0 +1,21 @@
+- type: title
+  value: Application paths
+  level: 4
+- name: inventory_path
+  type: input
+  default_value: etcbluebanquiseinventory/
+  description:
+  label: BlueBanquise inventory path to be managed by PolarBear.
+- name: polarbear_data_path
+  type: input
+  default_value: varlibsnowbear/
+  description:
+  label: PolarBear data storage path. (Parameters, states, etc.)
+- type: title
+  value: UI theme
+  level: 4
+- name: ui_theme
+  type: input
+  default_value: default
+  description:
+  label: Application CSS theme

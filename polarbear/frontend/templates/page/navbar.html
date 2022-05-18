@@ -1,0 +1,47 @@
+<!--
+###################################################
+NAVBAR
+-->
+<nav class="navbar is-dark">
+  <div class="navbar-brand">
+    <div style="width: 14rem; padding-top: 0.15em;"><a href="#/" class="navbar-item router-link-active"><img class="center" src="{{ url_for('static', filename='images/bluebanquise_logo_small_white.svg') }}" alt="BlueBanquise UI"> &nbsp; &nbsp;PolarBear</a></div>
+    <div data-target="navbarExampleTransparentExample" class="navbar-burger burger"><span></span> <span></span> <span></span>
+    </div>
+  </div>
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a href="/" class="navbar-item">Home</a>
+      {% for element in page_navigation_data %}
+        {% if element.sub_navigation is defined and element.sub_navigation %}
+          <div class="navbar-item has-dropdown is-hoverable">
+            <div class="navbar-link">{{ element.text }}</div>
+            <div class="navbar-dropdown is-boxed">
+              {% for sub_element in element.sub_navigation %}
+                {% if sub_element.name == 'navbar-divider' %}
+                  <hr class="navbar-divider">
+                {% else %}
+                  <a href="{{ sub_element.link }}" class="navbar-item">{{ sub_element.text }}</a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+        TOTO
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-light" href="/alerts/index.html">
+            <strong>Alerts</strong>
+          </a>
+          <a class="button is-primary" href="/parameters/index.html">
+            Parameters
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
