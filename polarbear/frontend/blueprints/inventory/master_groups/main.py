@@ -1,8 +1,8 @@
 import os
 import re
 import yaml
-from flask import Blueprint, render_template, request
-from functions import load_yaml,dump_yaml
+from flask import Blueprint, render_template, request, redirect, url_for
+from functions import load_yaml,dump_yaml,mergearrays
 import requests
 
 
@@ -31,3 +31,12 @@ def inventory_master_groups_index():
     page_navigation_data=page_navigation_data, \
     page_left_menu="master_groups/menu.html.j2", left_menu_active="index", \
     master_groups_dict=master_groups_dict)
+
+@master_groups.route("/inventory/master_groups", methods = ['POST'])
+def master_groups_post():
+    # Send new group to backend, and wait for answer
+    backend_response = requests.post("http://localhost:5001/v1/inventory/master_groups", json=mergearrays(request.form))
+    if backend_response.status_code == 200:
+        return redirect(url_for("master_groups.inventory_master_groups_index", status="updated"))
+    else:
+        return redirect(url_for("master_groups.inventory_master_groups_index", status="error"))

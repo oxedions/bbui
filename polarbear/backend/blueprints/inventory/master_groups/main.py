@@ -21,3 +21,8 @@ def inventory_master_groups_index():
              master_groups_data[folder] = yaml_buffer
 
     return jsonify(master_groups_data), 200
+
+@master_groups.route("/v1/inventory/master_groups", methods=["POST"])
+def master_groups_post(): # Add or update a master_group
+    dump_yaml(os.path.join(etc_path,'parameters.yml'),request.get_json())
+    return "OK", 200

@@ -1,13 +1,13 @@
-<h1 class="title">Add Custom Group</h1>
+<h1 class="title">Add Master Group</h1>
   <h2 class="subtitle">
-    Add a new Custom Group to cluster.<br>
+    Add a new Master Group to cluster.<br>
   </h2>
 
-<form action="/inventory/groups/index.html" method="POST">
+<form action="/inventory/master_groups" method="POST">
 
-{{ field_input("Enter custom group name:","add_custom_group_name","Text input",none) }}
+{{ field_input("Enter master group name:","add_master_group_name","Text input",none) }}
 
-{{ field_textarea("Enter custom group description:","add_custom_group_description","Text input","This is a generic group...") }}
+{{ field_textarea("Enter master group description:","add_master_group_description","Text input","This is a generic group...") }}
 
   <div class="field is-grouped">
     <div class="control">
