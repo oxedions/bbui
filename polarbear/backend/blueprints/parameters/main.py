@@ -6,7 +6,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, jsonif
 from functions import load_yaml,dump_yaml,merge_default_current,mergearrays
 import requests
 
-etc_path = 'B:\polarbear\etc'
+etc_path = 'I:\polarbear\etc'
 
 parameters = Blueprint('parameters', __name__, template_folder='templates')
 

@@ -21,7 +21,7 @@ import importlib
 
 app = Flask(__name__)
 
-etc_path = 'B:\polarbear\etc'
+etc_path = 'C:\polarbear\etc'
 
 # Load blueprints
 print('')

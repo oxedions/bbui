@@ -8,11 +8,18 @@ import requests
 
 parameters = Blueprint('parameters', __name__, template_folder='templates')
 
-etc_path = 'B:\polarbear\etc'
+etc_path = 'C:\polarbear\etc'
 page_navigation_data = load_yaml(os.path.join(etc_path,'frontend_blueprints.yml'))
 
+##########################################################################################
+########################################################################################
+######################################################################################
+################## FRONTEND
+################
+##############
+
 @parameters.route("/parameters/index.html", methods = ['GET'])
-def parameters_index():
+def parameters_front():
 
     flags={'status': None}
     # Grab status if it was passed as arguments
@@ -25,9 +32,9 @@ def parameters_index():
     # Grab page content
     polarbear_parameters_default = load_yaml('blueprints/parameters/parameters_fields.yml')
     # Grab current parameters from backend
-    polarbear_parameters_current = requests.get("http://localhost:5001/v1/parameters")
+    polarbear_parameters_current = parameters_back_get()
     # Update page content with current parameters: merge both with current precedence default
-    polarbear_parameters = merge_default_current(polarbear_parameters_default, polarbear_parameters_current.json())
+    polarbear_parameters = merge_default_current(polarbear_parameters_default, polarbear_parameters_current)
 
     return render_template("page.html.j2", \
     page_content_path="parameters/index.html.j2", \
@@ -37,11 +44,42 @@ def parameters_index():
     parameters_variables=polarbear_parameters )
 
 @parameters.route("/parameters", methods = ['POST'])
-def parameters_post():
-    backend_response = requests.post("http://localhost:5001/v1/parameters", json=mergearrays(request.form))
-    if backend_response.status_code == 200:
-        return redirect(url_for("parameters.parameters_index", status="updated"))
+def parameters_front_post():
+    parameters_back_post(mergearrays(request.form))
+    return redirect(url_for("parameters.parameters_front", status="updated"))
+
+##########################################################################################
+########################################################################################
+######################################################################################
+################## BACKEND - API
+################
+##############
+
+##############
+### GET
+##############
+def parameters_back_get():
+    # Check if parameters file exist
+    # - if not, return empty
+    # - if yes, we load the file content
+    file_exist = os.path.exists(os.path.join(etc_path,'parameters.yml'))
+    if not file_exist:
+        polarbear_parameters = {}
     else:
-        return redirect(url_for("parameters.parameters_index", status="error"))
+        polarbear_parameters = load_yaml(os.path.join(etc_path,'parameters.yml'))
+    return polarbear_parameters
 
+@parameters.route("/v1/parameters", methods=["GET"])
+def parameters_back_get_api():
+    return jsonify(parameters_back_get()), 200
 
+##############
+### POST
+##############
+def parameters_back_post(yaml_data): # Update parameters
+    dump_yaml(os.path.join(etc_path,'parameters.yml'),yaml_data)
+
+@parameters.route("/v1/parameters", methods=["POST"])
+def parameters_back_post_api():
+    parameters_back_post(request.get_json())
+    return "OK", 200

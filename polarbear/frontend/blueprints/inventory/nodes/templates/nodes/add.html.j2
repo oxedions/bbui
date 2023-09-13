@@ -1,0 +1,77 @@
+<h1 class="title">Add node</h1>
+  <h2 class="subtitle">
+    Add a new node to cluster.<br>
+  </h2>
+
+<form action="/inventory/nodes/add.html" method="POST" id="tyty">
+
+{% set master_groups_data = ['m1', 'm2']%}
+
+{% set equipment_profiles_data = ['e1', 'e2']%}
+
+{% set networks_data = ['n1', 'n2']%}
+
+
+{{ field_input("Enter new node hostname:","node_name","Text input",none) }}
+
+{% set mg_list = [] %}
+{% for mg in master_groups_data %}{% set mg_list = mg_list.append(mg) %}{% endfor %}
+{{ field_select("Select node master group :", "node_master_group", mg_list, mg_list[0]) }}
+
+{% set ep_list = [] %}
+{% for ep in equipment_profiles_data %}{% set ep_list = ep_list.append(mg) %}{% endfor %}
+{{ field_select("Select node equipment profile :", "node_equipment_profile", ep_list, ep_list[0]) }}
+
+{% set net_list = [] %}
+{% for net in networks_data %}{% set ep_list = ep_list.append(mg) %}{% endfor %}
+
+
+<input class="input" type="text" placeholder="Text input" id="toto" name="toto" value="toto">
+  
+<h3 id="nics">nics</h3>
+
+<button type="button" onClick="add_node_to_form()">
+      + Add nic
+</button>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-link">Submit</button>
+    </div>
+  </div>
+
+</form>
+node
+
+
+<script>
+
+    var id_inc = 1;
+
+    function add_node_to_form() {
+
+    document.getElementById("nics").insertAdjacentHTML('beforeend',"<h3>Nic " + id_inc.toString() + "</h3>");
+
+    document.getElementById("nics").insertAdjacentHTML('beforeend',"Interface: ");
+    var nic_interface = document.createElement("input");
+    nic_interface.setAttribute("class", "input");
+    nic_interface.setAttribute("type", "text");
+    nic_interface.setAttribute("name", "interface");
+    nic_interface.setAttribute("id", "interface_"+id_inc.toString());
+    nic_interface.setAttribute("value", "eth"+id_inc.toString());
+    document.getElementById("nics").appendChild(nic_interface);
+
+    document.getElementById("nics").insertAdjacentHTML('beforeend',"Logical network: ");
+    var nic_interface = document.createElement("input");
+    nic_interface.setAttribute("class", "select");
+    nic_interface.setAttribute("type", "text");
+    nic_interface.setAttribute("name", "network");
+    nic_interface.setAttribute("id", "network"+id_inc.toString());
+    nic_interface.setAttribute("value", );
+    document.getElementById("nics").appendChild(nic_interface);
+
+    window.id_inc++;
+    console.log(window.id_inc);
+    }
+
+</script>

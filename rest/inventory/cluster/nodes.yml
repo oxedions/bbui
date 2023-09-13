@@ -1,0 +1,9 @@
+all:
+  hosts:
+    c001: null
+    c002:
+      bmc:
+        ip4: ''
+        mac: ''
+        name: ''
+      network_interfaces: []

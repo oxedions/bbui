@@ -1,19 +1,13 @@
 <h1 class="title">Manage Custom Group</h1>
 
 
-<form action="/inventory/groups/index.html?custom_group={{custom_group}}" method="POST">
+<form action="/inventory/master_groups/manage.html?old_master_group={{ master_group_data['master_group_name'] | replace('mg_','') }}" method="POST">
 
-  <h2 class="subtitle">
-    Description:<br>
-  </h2>
+{{ field_input("Master group name:","master_group_name","Text input",master_group_data['master_group_name'] | replace('mg_','')) }}
 
-{{ field_textarea("Use the following field to set group description:","manage_custom_group_description","Variables here in YAML.",custom_group_data['description']) }}
+{{ field_textarea("Master group description:","master_group_description","Text input",master_group_data['master_group_description']) }}
 
-  <h2 class="subtitle">
-    Custom variables:<br>
-  </h2>
-
-{{ field_textarea("Use the following field to set group custom variables (YAML syntax):","manage_custom_group_variables","Variables here in YAML.",custom_group_variables) }}
+{{ field_textarea("Master group variables (YAML syntax):","master_group_variables","Variables here in YAML.",master_group_data['master_group_variables']) }}
 
   <div class="field is-grouped">
     <div class="control">
