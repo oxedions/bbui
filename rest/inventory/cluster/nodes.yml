@@ -7,3 +7,30 @@ all:
         mac: ''
         name: ''
       network_interfaces: []
+    c004:
+      bmc:
+        ip4: ''
+        mac: ''
+        name: ''
+      network_interfaces:
+      - interface: en1
+        ip4: 10.10.0.1
+        mac: null
+        network: null
+        skip: false
+        state: present
+        type: ethernet
+      toto: tutu
+    c005:
+      bmc:
+        ip4: ''
+        mac: ''
+        name: ''
+      network_interfaces:
+      - interface: en1
+        ip4: 10.10.0.1
+        mac: XX
+        network: net-admin
+        skip: false
+        state: present
+        type: ethernet

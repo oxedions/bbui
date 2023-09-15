@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 import os
 import yaml
+import json
 from flask import Flask, request, jsonify
 from flask_restful import Api, Resource
 import importlib
@@ -31,7 +32,7 @@ if passed_arguments.server:
     print("URLs map:")
     print(app.url_map)
 
-    print("running as server")
+    print("Now running as server")
     app.run(debug=True)
 
 else:
@@ -40,18 +41,34 @@ else:
         print("Loading '" + to_load_blueprint + "' blueprint")
         dyn_modules[to_load_blueprint] = importlib.import_module('blueprints.' + to_load_blueprint)
     cli_method = cli_request[0]
-    if cli_method not in ['get', 'post']:
+    if cli_method not in ['get', 'post', 'delete', 'put']:
         print('Error, unknown ' + str(cli_method) + ' method')
         quit()
     cli_url = cli_request[1]
-    cli_data = ' '.join(cli_request[2:])
+    if len(cli_request[2:]) > 0 and cli_request[2:] is not None:
+        cli_data = ' '.join(cli_request[2:])
+    else:
+        print("Using empty data")
+        cli_data = "{}"
+    print(cli_url.split('/')[0])
+    print(cli_method)
+    print(cli_url)
     print(cli_data)
-    #print(dyn_modules['nodes'].cli_nodes_resource_get())
-    print(getattr(dyn_modules[cli_url.split('/')[0]], 'cli_' + cli_url.replace('/', '_') + '_resource_' + cli_method)(cli_data))
-    quit()
-    print("running as client")
-    resource_name = "nodes"
-    ressource_method = "get"
+    call_message, call_http_code = dyn_modules[cli_url.split('/')[0]].cli_main(cli_method, cli_url, cli_data)
+    print("Code: " + str(call_http_code))
+    print("Message :\n")
+    # Try to convert message to yaml for better output
+    try:
+        print(yaml.safe_dump(call_message, allow_unicode=True, default_flow_style=False))
+    except:
+        print(str(call_message))
+    finally:
+        quit()
+
+    #print(getattr(dyn_modules[cli_url.split('/')[0]], 'cli_' + cli_url.replace('/', '_') + '_resource_' + cli_method)(cli_data))
+    #print("running as client")
+    #resource_name = "nodes"
+    #ressource_method = "get"
     #eval('print(module.cli_nodes_resource_get()))
     #print(globals())
     #print(globals()["module"].cli_nodes_resource_get())
