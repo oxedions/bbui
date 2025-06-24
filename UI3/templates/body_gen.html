@@ -1,0 +1,113 @@
+  <div class="bd-docs-lead bd-theme-library">
+    
+
+    <section class="bd-hero is-docs">
+  <div class="bd-hero-body">
+    <h1 class="bd-hero-title algolia-lvl0">
+      <p>Menu</p>
+
+    </h1>
+
+    <hr class="bd-hr">
+
+    <h2 class="bd-hero-subtitle algolia-lvl1">
+      <p>A simple <strong>menu</strong>, for any type of vertical navigation</p>
+
+    </h2>
+
+    
+  </div>
+
+  
+  
+</section>
+
+    <div class="bd-docs-content algolia-content">
+
+        <div class="content">
+        <p>
+            The Bulma <code>menu</code> is a vertical navigation component that
+            comprises:
+        </p>
+        <ul>
+            <li>the <code>menu</code> container</li>
+            <li>informative <code>menu-label</code> labels</li>
+            <li>
+            interactive <code>menu-list</code> lists that can be nested up to 2 levels
+            </li>
+        </ul>
+        </div>
+
+    </div>
+
+
+
+
+    <h1 class="title">Node Configuration</h1>
+
+    <form id="bmc-form">
+      <!-- Top-Level Info -->
+      <div class="box">
+        <h2 class="subtitle">General Info</h2>
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <input class="input" type="text" name="name" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Function</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select name="function" id="function-select" required>
+                <option value="">Loading...</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">OS</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select name="os" id="os-select" required>
+                <option value="">Loading...</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Hardware</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select name="hardware" id="hardware-select" required>
+                <option value="">Loading...</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BMC Section -->
+      <div class="box">
+        <h2 class="subtitle">BMC</h2>
+        <div class="field"><label class="label">Name</label><div class="control"><input class="input" type="text" name="bmc[name]" required></div></div>
+        <div class="field"><label class="label">Network</label><div class="control"><div class="select"><select name="bmc[network]" id="bmc-network" required><option value="">Loading...</option></select></div></div></div>
+        <div class="field"><label class="label">IPv4</label><div class="control"><input class="input" type="text" name="bmc[ip4]" pattern="^(\\d{1,3}\\.){3}\\d{1,3}$" required></div></div>
+        <div class="field"><label class="label">MAC Address</label><div class="control"><input class="input" type="text" name="bmc[mac]" pattern="^([0-9A-Fa-f]{2}[:\\-]){5}([0-9A-Fa-f]{2})$" required></div></div>
+      </div>
+
+      <!-- Interfaces Section -->
+      <div class="box">
+        <h2 class="subtitle">Network Interfaces</h2>
+        <div id="interface-container"></div>
+        <div class="field"><button type="button" class="button is-link is-light" onclick="addInterface()">Add Interface</button></div>
+      </div>
+
+      <div class="field"><div class="control"><button type="submit" class="button is-primary">Submit</button></div></div>
+    </form>
+
+
+  </div>

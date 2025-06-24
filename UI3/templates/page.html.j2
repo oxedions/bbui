@@ -1,0 +1,9 @@
+{% include "head.html" with context %}
+
+{% if left_menu is defined %}
+{% include left_menu with context %}
+{% endif %}
+
+{% include page_body with context %}
+
+{% include "foot.html" with context %}
