@@ -1,0 +1,67 @@
+<div class="bd-docs-lead bd-theme-library">
+
+  <section class="bd-hero is-docs">
+    <div class="bd-hero-body">
+      <h1 class="bd-hero-title algolia-lvl0">
+        <p>Add function group</p>
+      </h1>
+      <hr class="bd-hr">
+      <h2 class="bd-hero-subtitle algolia-lvl1">
+        <p>Add function groups to specify nodes purposes.</p>
+      </h2>
+    </div>
+  </section>
+
+  <form id="groupForm">
+    <div class="field">
+      <label class="label">Group Name</label>
+      <div class="control">
+        <input class="input" type="text" id="name" name="name" placeholder="Enter group name" required>
+      </div>
+    </div>
+
+    <div class="control">
+      <button class="button is-primary" type="submit">Submit</button>
+    </div>
+  </form>
+
+  <div id="result" class="notification is-hidden mt-4"></div>
+
+  <script>
+    document.getElementById('groupForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const prefixedName = `fn_${name}`;
+
+      const response = await fetch('http://localhost:5000/api/v1/inventory/groups', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name: prefixedName })
+      });
+
+      let responseData;
+      try {
+        responseData = await response.json();
+      } catch (jsonError) {
+        responseData = await response.text();
+      }
+
+      const resultDiv = document.getElementById('result');
+      if (response.ok) {
+        resultDiv.className = "notification is-success";
+        resultDiv.innerHTML = `Group successfully created!<br>Server response: ${typeof responseData === 'string' ? responseData : JSON.stringify(responseData)}`;
+        setTimeout(() => {
+          window.location.href = 'http://localhost:5000/inventory/groups';
+        }, 2000); // delay in milliseconds
+      } else {
+        resultDiv.className = "notification is-danger";
+        resultDiv.innerHTML = `Error creating group.<br>Server response: ${typeof responseData === 'string' ? responseData : JSON.stringify(responseData)}`;
+      }
+      resultDiv.classList.remove("is-hidden");
+    });
+  </script>
+
+</div>

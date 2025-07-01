@@ -1,1 +1,4 @@
-- inventory/nodes
+inventory: blueprints/inventory/inventory
+nodes: blueprints/inventory/nodes
+groups_back: blueprints/inventory/groups_back
+groups_front: blueprints/inventory/groups_front

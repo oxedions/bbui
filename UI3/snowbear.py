@@ -27,14 +27,14 @@ import importlib
 app = Flask(__name__)
 
 # Load blueprints
-# print('')
-# with open('blueprints.yml', 'r') as f:
-#   to_load_blueprints = yaml.safe_load(f, Loader=yaml.FullLoader)
-# for bprint in to_load_blueprints:
-#         print('Importing blueprint ' + str(bprint))
-#         module = importlib.import_module('blueprints.' + str(bprint).replace('/','.') + '.main', package='app')
-#         app.register_blueprint(getattr(module, navigation['name']))
-# print('')
+print('')
+with open('blueprints.yml', 'r') as f:
+  to_load_blueprints = yaml.safe_load(f)
+for bname, bpath in to_load_blueprints.items():
+        print('Importing blueprint ' + str(bname))
+        module = importlib.import_module(str(bpath).replace('/','.') + '.main', package='app')
+        app.register_blueprint(getattr(module, str(bname)))
+print('')
 
 @app.route('/webfonts/<path:filename>')
 def cover_webfonts(filename):
@@ -100,5 +100,8 @@ if __name__ == '__main__':
                 BlueBanquise WebUI
                 v 1.0.0
     ''')
+
+    print("URLs map:")
+    print(app.url_map)
 
     app.run()
