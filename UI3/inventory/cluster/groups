@@ -1,6 +1,8 @@
 [fn_management]
-mgmt
 [fn_compute]
-c001
 c002
-[fn_toto]
+[os_ubuntu]
+c002
+[hw_vm]
+[hw_baremetal]
+c002

@@ -15,8 +15,12 @@ def add_fn_group():
 
 @groups_front.route("/inventory/groups/add_os_group", methods=["GET"])
 def add_os_group():
-  return render_template("page.html.j2", page_body="groups/add_os_group.html", page_title="Add function group", left_menu="inventory/menu.html", navbar_active="home")
+  return render_template("page.html.j2", page_body="groups/add_os_group.html", page_title="Add os group", left_menu="inventory/menu.html", navbar_active="home")
+
+@groups_front.route("/inventory/groups/update_os_group", methods=["GET"])
+def update_os_group():
+  return render_template("page.html.j2", page_body="groups/update_os_group.html", page_title="Update os group", left_menu="inventory/menu.html", navbar_active="home")
 
 @groups_front.route("/inventory/groups/add_hw_group", methods=["GET"])
 def add_hw_group():
-  return render_template("page.html.j2", page_body="groups/add_hw_group.html", page_title="Add function group", left_menu="inventory/menu.html", navbar_active="home")
+  return render_template("page.html.j2", page_body="groups/add_hw_group.html", page_title="Add hardware group", left_menu="inventory/menu.html", navbar_active="home")

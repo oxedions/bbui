@@ -1,2 +1,4 @@
 all:
   children:
+    c002:
+      network_interfaces: foobar
