@@ -1,0 +1,69 @@
+<div class="bd-docs-lead bd-theme-library">
+
+  <section class="bd-hero is-docs">
+    <div class="bd-hero-body">
+      <h1 class="bd-hero-title algolia-lvl0">
+        <p>Function groups</p>
+      </h1>
+      <hr class="bd-hr">
+      <h2 class="bd-hero-subtitle algolia-lvl1">
+        <p>Manage function groups of cluster.</p>
+      </h2>
+    </div>
+  </section>
+
+  <div>
+    <h2 class="subtitle">Actions</h2>
+    <div class="control">
+      <a href="http://localhost:5000/inventory/groups/add_fn_group">
+      <button class="button is-primary">Add a new function group</button>
+      </a>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="subtitle">Function groups list</h2>
+    <div id="fn_groups_list"></div>  
+  </div>
+
+  <script>
+
+    async function loadGroups() {
+
+      try {
+        const response = await fetch(`http://localhost:5000/api/v1/inventory/groups`);
+        if (response.ok) {
+          const data = await response.json();
+          const resultDiv = document.getElementById('fn_groups_list');
+          groups_list = "<ul>";
+          for (var group in data) {
+            if (group.startsWith('fn_')) {
+              groups_list = groups_list + '<li><a href="http://localhost:5000/inventory/groups/fn_group?group=' + group + '"><b>' + group.replace('fn_','') + '</b></a></li><br>';
+            }
+              // JSON.stringify(data[key] + "</li>")
+          }            
+          // for (var key in data) {
+          //   if (key.startsWith('fn_')) {
+          //     groups_list = groups_list + "<li><b>" + key.replace('fn_','') + "</b><br><ul>Member nodes:<ul>";
+          //       for (const node of data[key]['nodes']) {
+          //         groups_list = groups_list + "<li>" + node + "</li>";
+          //       }
+          //     groups_list = groups_list + "</ul></ul></li><br>";
+          //   }
+          //     // JSON.stringify(data[key] + "</li>")
+          // }
+          groups_list = groups_list + "</ul>";
+          resultDiv.innerHTML = groups_list;
+        } else {
+          console.warn("Failed to load groups data");
+        }
+      } catch (error) {
+        console.error("Error fetching group data:", error);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadGroups);
+
+  </script>
+
+</div>

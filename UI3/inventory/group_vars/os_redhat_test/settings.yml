@@ -1,0 +1,11 @@
+os_access_control: enforcing
+os_firewall: true
+os_keyboard_layout: Fr
+os_operating_system:
+  distribution: redhat
+  distribution_major_version: '9'
+  distribution_version: '9'
+  repositories_environment: ''
+os_partitioning: coucou
+os_preserve_efi_first_boot_device: true
+os_system_language: FR

@@ -25,16 +25,15 @@
 
   <nav id="js-nav" class="bd-nav navbar">
 
-    <a class="bd-nav-item bd-theme-twitter is-twitter is-active" title="Home" href="/">
+    <a class="bd-nav-item bd-theme-twitter is-twitter {% if navbar_active == 'home' %} is-active{% endif %}" title="Home" href="/">
         <span class="icon"><i class="fas fa-house"></i></span>
         <span class="bd-nav-item-name">Home</span>
     </a>
 
-    <a class="bd-nav-item bd-theme-docs is-docs" title="Cluster inventory" href="/inventory">
+    <a class="bd-nav-item bd-theme-docs is-docs {% if navbar_active == 'inventory' %} is-active{% endif %}" title="Cluster inventory" href="/inventory">
         <span class="icon"><i class="fas fa-boxes"></i></span>
         <span class="bd-nav-item-name">Inventory</span>
     </a>
-
 
     <!-- Inventory Dropdown -->
     <div class="navbar-item has-dropdown is-hoverable">

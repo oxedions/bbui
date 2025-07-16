@@ -2,23 +2,72 @@
   <div class="bd-menu">
     <div class="bd-menu-section is-start">
       <h3 class="bd-menu-heading js-menu-heading">
-        <span class="icon"><i class="fas fa-house"></i></span>
+        <span class="icon"><i class="fas fa-layer-group"></i></span>
         <strong>Groups</strong>
       </h3>
       <ul class="bd-menu-list js-menu-list" style="--size: 7">
         <li>
-          <a class="bd-menu-link" href="/" data-current-link-id="components-navbar" data-name="Overview" data-size="0">
+          <a class="bd-menu-link {% if left_menu_active == 'fn_groups' %} is-active{% endif %}" href="/inventory/groups/fn_groups" data-current-link-id="components-navbar" data-name="Overview" data-size="0">
             <span class="bd-menu-link-name">Function groups</span>
           </a>
         </li>
         <li>
-          <a class="bd-menu-link" href="/" data-current-link-id="components-navbar" data-name="Overview" data-size="0">
+          <a class="bd-menu-link {% if left_menu_active == 'os_groups' %} is-active{% endif %}" href="/inventory/groups/os_groups" data-current-link-id="components-navbar" data-name="Overview" data-size="0">
             <span class="bd-menu-link-name">OS groups</span>
           </a>
         </li>
         <li>
-          <a class="bd-menu-link" href="/" data-current-link-id="components-navbar" data-name="Overview" data-size="0">
+          <a class="bd-menu-link {% if left_menu_active == 'hw_groups' %} is-active{% endif %}" href="/inventory/groups/hw_groups" data-current-link-id="components-navbar" data-name="Overview" data-size="0">
             <span class="bd-menu-link-name">Hardware groups</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="bd-menu-section is-start">
+      <h3 class="bd-menu-heading js-menu-heading">
+        <span class="icon"><i class="fas fa-network-wired"></i></span>
+        <strong>Networks</strong>
+      </h3>
+      <ul class="bd-menu-list js-menu-list" style="--size: 7">
+        <li>
+          <a class="bd-menu-link" href="/" data-current-link-id="components-navbar" data-name="Overview" data-size="0">
+            <span class="bd-menu-link-name">Management networks</span>
+          </a>
+        </li>
+        <li>
+          <a class="bd-menu-link" href="/" data-current-link-id="components-navbar" data-name="Overview" data-size="0">
+            <span class="bd-menu-link-name">Other networks</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="bd-menu-section is-start">
+      <h3 class="bd-menu-heading js-menu-heading">
+        <span class="icon"><i class="fas fa-server"></i></span>
+        <strong>Nodes</strong>
+      </h3>
+      <ul class="bd-menu-list js-menu-list" style="--size: 7">
+        <li>
+          <a class="bd-menu-link" href="/" data-current-link-id="components-navbar" data-name="Overview" data-size="0">
+            <span class="bd-menu-link-name">Nodes list</span>
+          </a>
+        </li>
+        <li>
+          <a class="bd-menu-link" href="/" data-current-link-id="components-navbar" data-name="Overview" data-size="0">
+            <span class="bd-menu-link-name">Cluster view</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="bd-menu-section is-start">
+      <h3 class="bd-menu-heading js-menu-heading">
+        <span class="icon"><i class="fas fa-cog"></i></span>
+        <strong>Settings</strong>
+      </h3>
+      <ul class="bd-menu-list js-menu-list" style="--size: 7">
+        <li>
+          <a class="bd-menu-link" href="/" data-current-link-id="components-navbar" data-name="Overview" data-size="0">
+            <span class="bd-menu-link-name">General</span>
           </a>
         </li>
       </ul>

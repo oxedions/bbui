@@ -2,3 +2,5 @@ inventory: blueprints/inventory/inventory
 nodes: blueprints/inventory/nodes
 groups_back: blueprints/inventory/groups_back
 groups_front: blueprints/inventory/groups_front
+settings_back: blueprints/inventory/settings_back
+networks_back: blueprints/inventory/networks_back

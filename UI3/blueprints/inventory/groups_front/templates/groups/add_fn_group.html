@@ -54,7 +54,7 @@
         resultDiv.className = "notification is-success";
         resultDiv.innerHTML = `Group successfully created!<br>Server response: ${typeof responseData === 'string' ? responseData : JSON.stringify(responseData)}`;
         setTimeout(() => {
-          window.location.href = 'http://localhost:5000/inventory/groups';
+          window.location.href = 'http://localhost:5000/inventory/groups/fn_groups';
         }, 2000); // delay in milliseconds
       } else {
         resultDiv.className = "notification is-danger";

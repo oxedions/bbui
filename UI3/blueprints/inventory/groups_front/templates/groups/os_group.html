@@ -3,11 +3,11 @@
   <section class="bd-hero is-docs">
     <div class="bd-hero-body">
       <h1 class="bd-hero-title algolia-lvl0">
-        <p>Add OS group</p>
+        <p id="main_title">Manage OS group</p>
       </h1>
       <hr class="bd-hr">
       <h2 class="bd-hero-subtitle algolia-lvl1">
-        <p>Add OS groups to specify nodes operating system settings.</p>
+        <p>Manage OS group.</p>
       </h2>
     </div>
   </section>
@@ -168,6 +168,9 @@
     async function loadFormData() {
       const group = getQueryParam("group");
       if (!group) return;
+
+      const resultp = document.getElementById('main_title');
+      resultp.innerHTML = group.replace('os_','');
 
       try {
         const response = await fetch(`http://localhost:5000/api/v1/inventory/groups/${group}`);

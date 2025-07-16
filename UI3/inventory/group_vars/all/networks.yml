@@ -1,0 +1,4 @@
+networks:
+  net-admin:
+    foo: bar
+    gateway: 10.10.0.3

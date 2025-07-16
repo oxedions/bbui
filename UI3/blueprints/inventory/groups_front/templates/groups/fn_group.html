@@ -1,0 +1,65 @@
+<div class="bd-docs-lead bd-theme-library">
+
+  <section class="bd-hero is-docs">
+    <div class="bd-hero-body">
+      <h1 class="bd-hero-title algolia-lvl0">
+        <p id="main_title">Manage function group</p>
+      </h1>
+      <hr class="bd-hr">
+      <h2 class="bd-hero-subtitle algolia-lvl1">
+        <p>Manage function group</p>
+      </h2>
+    </div>
+  </section>
+
+  <div>
+    <h2 class="subtitle">Member nodes</h2>
+    <div id="nodes"></div>  
+  </div>
+
+  <div>
+    <h2 class="subtitle">Actions</h2>
+    <div class="control">
+      <button class="button is-danger">Delete function group</button>
+    </div>
+  </div>
+
+  <script>
+
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    async function loadNodes() {
+
+      const group = getQueryParam("group");
+      if (!group) return;
+
+      const resultp = document.getElementById('main_title');
+      resultp.innerHTML = group.replace('fn_','');
+
+      try {
+        const response = await fetch(`http://localhost:5000/api/v1/inventory/groups/` + group);
+        if (response.ok) {
+          const data = await response.json();
+          const resultDiv = document.getElementById('nodes');
+          nodes_list = "<ul>";
+          for (const node of data['nodes']) {
+            nodes_list = nodes_list + "<li>" + node + "</li>";
+          }
+          nodes_list = nodes_list + "</ul>";
+          resultDiv.innerHTML = nodes_list;
+        } else {
+          console.warn("Failed to load group data");
+        }
+      } catch (error) {
+        console.error("Error fetching group data:", error);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadNodes);
+
+  </script>
+
+</div>

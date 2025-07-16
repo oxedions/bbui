@@ -8,15 +8,15 @@ YAML_NODES_DB = 'inventory/cluster/nodes.yml'
 INI_NODES_GROUPS = 'inventory/cluster/groups'
 
 
-# Load YAML DB
-def load_db():
+# Load YAML
+def load_yaml():
     if not os.path.exists(YAML_NODES_DB):
         return {}
     with open(YAML_NODES_DB, 'r') as f:
         return yaml.safe_load(f)['all']['children'] or {}
 
-# Save YAML DB
-def save_db(data):
+# Save YAML
+def save_yaml(data):
     with open(YAML_NODES_DB, 'w') as f:
         yaml.dump({'all':{'children':data}}, f)
 
@@ -54,7 +54,7 @@ api = Api(nodes)
 
 class NodeListResource(Resource):
     def get(self):
-        nodes_list = load_db()
+        nodes_list = load_yaml()
         # We need to gather nodes group too
         groups_list_nodes = read_INI(INI_NODES_GROUPS)
         for node in nodes_list:
@@ -70,7 +70,7 @@ class NodeListResource(Resource):
 
     def post(self):
         new_node = request.get_json(force=True)
-        nodes_list = load_db()
+        nodes_list = load_yaml()
         node_name = new_node.pop('name')
         if node_name in nodes_list:
             return {'message': 'Node already in the inventory', 'node': node_name}, 409
@@ -84,14 +84,14 @@ class NodeListResource(Resource):
                     groups_list_nodes[group].append(node_name)
             write_INI(groups_list_nodes, INI_NODES_GROUPS)
         nodes_list[node_name] = new_node
-        save_db(nodes_list)
+        save_yaml(nodes_list)
         return {'message': 'Node added', 'node': node_name}, 201
 
 class NodeResource(Resource):
 
     def get(self, node_name):
         # Get node from main list with its parameters
-        nodes_list = load_db()
+        nodes_list = load_yaml()
         if node_name not in nodes_list:
             abort(404, message="Node not found")
         node = nodes_list[node_name]
@@ -112,7 +112,7 @@ class NodeResource(Resource):
         if 'name' in updated_node:
             del updated_node['name']
         # Get node from main list with its parameters
-        nodes_list = load_db()
+        nodes_list = load_yaml()
         if node_name not in nodes_list:
             abort(404, message="Node not found")
         # Check if we need to update groups
@@ -129,11 +129,11 @@ class NodeResource(Resource):
                     groups_list_nodes[updated_node.pop(str(group_prefix + 'group'))].append(node_name)
             write_INI(groups_list_nodes, INI_NODES_GROUPS)
         nodes_list[node_name] = updated_node
-        save_db(nodes_list)
+        save_yaml(nodes_list)
         return {'message': 'Node updated', 'node': node_name}, 200
 
     def delete(self, node_name):
-        nodes_list = load_db()
+        nodes_list = load_yaml()
         if node_name not in nodes_list:
             abort(404, message="Node not found")
         # Check if we need to purge groups
@@ -144,7 +144,7 @@ class NodeResource(Resource):
         write_INI(groups_list_nodes, INI_NODES_GROUPS)
         # Now delete node from main list and return
         del nodes_list[node_name]
-        save_db(nodes_list)
+        save_yaml(nodes_list)
         return {'message': 'Node deleted', 'node': node_name}, 200
 
 # Routes
