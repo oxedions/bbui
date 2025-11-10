@@ -12,131 +12,131 @@
     </div>
   </section>
 
-      <form id="inventoryForm">
+    <form id="inventoryForm">
 
-        <!-- General -->
-        <div class="box">
-          <h2 class="subtitle">General</h2>
+      <!-- General -->
+      <div class="box">
+        <h2 class="subtitle">General</h2>
 
-          <div class="field">
-            <label class="label">Name</label>
-            <div class="control">
-              <input class="input" type="text" name="name" required>
-            </div>
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <input class="input" type="text" name="name" required>
           </div>
+        </div>
 
-          <div class="field">
-            <label class="label">Keyboard Layout</label>
-            <div class="control">
-              <input class="input" type="text" name="os_keyboard_layout">
-            </div>
+        <div class="field">
+          <label class="label">Keyboard Layout</label>
+          <div class="control">
+            <input class="input" type="text" name="os_keyboard_layout">
           </div>
+        </div>
 
-          <div class="field">
-            <label class="label">System Language</label>
-            <div class="control">
-              <input class="input" type="text" name="os_system_language">
+        <div class="field">
+          <label class="label">System Language</label>
+          <div class="control">
+            <input class="input" type="text" name="os_system_language">
+          </div>
+        </div>
+      </div>
+
+      <!-- Security -->
+      <div class="box">
+        <h2 class="subtitle">Security</h2>
+
+        <div class="field">
+          <label class="label">Firewall</label>
+          <div class="control">
+            <div class="select">
+              <select name="os_firewall">
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
             </div>
           </div>
         </div>
 
-        <!-- Security -->
-        <div class="box">
-          <h2 class="subtitle">Security</h2>
-
-          <div class="field">
-            <label class="label">Firewall</label>
-            <div class="control">
-              <div class="select">
-                <select name="os_firewall">
-                  <option value="true">true</option>
-                  <option value="false">false</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Access Control</label>
-            <div class="control">
-              <div class="select">
-                <select name="os_access_control">
-                  <option value="enforcing">enforcing</option>
-                  <option value="permissive">permissive</option>
-                  <option value="disabled">disabled</option>
-                </select>
-              </div>
+        <div class="field">
+          <label class="label">Access Control</label>
+          <div class="control">
+            <div class="select">
+              <select name="os_access_control">
+                <option value="enforcing">enforcing</option>
+                <option value="permissive">permissive</option>
+                <option value="disabled">disabled</option>
+              </select>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Storage -->
-        <div class="box">
-          <h2 class="subtitle">Storage</h2>
+      <!-- Storage -->
+      <div class="box">
+        <h2 class="subtitle">Storage</h2>
 
-          <div class="field">
-            <label class="label">Partitioning</label>
-            <div class="control">
-              <textarea class="textarea" name="os_partitioning" placeholder="Enter partitioning details..."></textarea>
-            </div>
+        <div class="field">
+          <label class="label">Partitioning</label>
+          <div class="control">
+            <textarea class="textarea" name="os_partitioning" placeholder="Enter partitioning details..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Operating System -->
+      <div class="box">
+        <h2 class="subtitle">Operating System</h2>
+
+        <div class="field">
+          <label class="label">Distribution</label>
+          <div class="control">
+            <input class="input" type="text" name="os_operating_system.distribution">
           </div>
         </div>
 
-        <!-- Operating System -->
-        <div class="box">
-          <h2 class="subtitle">Operating System</h2>
-
-          <div class="field">
-            <label class="label">Distribution</label>
-            <div class="control">
-              <input class="input" type="text" name="os_operating_system.distribution">
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Distribution Major Version</label>
-            <div class="control">
-              <input class="input" type="text" name="os_operating_system.distribution_major_version">
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Distribution Version</label>
-            <div class="control">
-              <input class="input" type="text" name="os_operating_system.distribution_version">
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Repositories Environment</label>
-            <div class="control">
-              <input class="input" type="text" name="os_operating_system.repositories_environment">
-            </div>
+        <div class="field">
+          <label class="label">Distribution Major Version</label>
+          <div class="control">
+            <input class="input" type="text" name="os_operating_system.distribution_major_version">
           </div>
         </div>
 
-        <!-- Other -->
-        <div class="box">
-          <h2 class="subtitle">Other</h2>
-
-          <div class="field">
-            <label class="label">Preserve EFI First Boot Device</label>
-            <div class="control">
-              <div class="select">
-                <select name="os_preserve_efi_first_boot_device">
-                  <option value="true">true</option>
-                  <option value="false">false</option>
-                </select>
-              </div>
-            </div>
+        <div class="field">
+          <label class="label">Distribution Version</label>
+          <div class="control">
+            <input class="input" type="text" name="os_operating_system.distribution_version">
           </div>
         </div>
 
-        <div class="control">
-          <button class="button is-primary" type="submit">Submit</button>
+        <div class="field">
+          <label class="label">Repositories Environment</label>
+          <div class="control">
+            <input class="input" type="text" name="os_operating_system.repositories_environment">
+          </div>
         </div>
+      </div>
 
-      </form>
+      <!-- Other -->
+      <div class="box">
+        <h2 class="subtitle">Other</h2>
+
+        <div class="field">
+          <label class="label">Preserve EFI First Boot Device</label>
+          <div class="control">
+            <div class="select">
+              <select name="os_preserve_efi_first_boot_device">
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="control">
+        <button class="button is-primary" type="submit">Submit</button>
+      </div>
+
+    </form>
 
   <div id="result" class="notification is-hidden mt-4"></div>
 

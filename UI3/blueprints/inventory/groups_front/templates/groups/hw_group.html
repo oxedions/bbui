@@ -1,0 +1,244 @@
+<div class="bd-docs-lead bd-theme-library">
+
+  <section class="bd-hero is-docs">
+    <div class="bd-hero-body">
+      <h1 class="bd-hero-title algolia-lvl0">
+        <p id="main_title">Manage OS group</p>
+      </h1>
+      <hr class="bd-hr">
+      <h2 class="bd-hero-subtitle algolia-lvl1">
+        <p>Manage OS group.</p>
+      </h2>
+    </div>
+  </section>
+
+      <form id="inventoryForm">
+
+        <!-- General -->
+        <div class="box">
+          <h2 class="subtitle">General</h2>
+
+          <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+              <input class="input" type="text" name="name" required readonly>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Keyboard Layout</label>
+            <div class="control">
+              <input class="input" type="text" name="os_keyboard_layout">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">System Language</label>
+            <div class="control">
+              <input class="input" type="text" name="os_system_language">
+            </div>
+          </div>
+        </div>
+
+        <!-- Security -->
+        <div class="box">
+          <h2 class="subtitle">Security</h2>
+
+          <div class="field">
+            <label class="label">Firewall</label>
+            <div class="control">
+              <div class="select">
+                <select name="os_firewall">
+                  <option value="true">true</option>
+                  <option value="false">false</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Access Control</label>
+            <div class="control">
+              <div class="select">
+                <select name="os_access_control">
+                  <option value="enforcing">enforcing</option>
+                  <option value="permissive">permissive</option>
+                  <option value="disabled">disabled</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Storage -->
+        <div class="box">
+          <h2 class="subtitle">Storage</h2>
+
+          <div class="field">
+            <label class="label">Partitioning</label>
+            <div class="control">
+              <textarea class="textarea" name="os_partitioning" placeholder="Enter partitioning details..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Operating System -->
+        <div class="box">
+          <h2 class="subtitle">Operating System</h2>
+
+          <div class="field">
+            <label class="label">Distribution</label>
+            <div class="control">
+              <input class="input" type="text" name="os_operating_system.distribution">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Distribution Major Version</label>
+            <div class="control">
+              <input class="input" type="text" name="os_operating_system.distribution_major_version">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Distribution Version</label>
+            <div class="control">
+              <input class="input" type="text" name="os_operating_system.distribution_version">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Repositories Environment</label>
+            <div class="control">
+              <input class="input" type="text" name="os_operating_system.repositories_environment">
+            </div>
+          </div>
+        </div>
+
+        <!-- Other -->
+        <div class="box">
+          <h2 class="subtitle">Other</h2>
+
+          <div class="field">
+            <label class="label">Preserve EFI First Boot Device</label>
+            <div class="control">
+              <div class="select">
+                <select name="os_preserve_efi_first_boot_device">
+                  <option value="true">true</option>
+                  <option value="false">false</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="control">
+          <button class="button is-primary" type="submit">Submit</button>
+        </div>
+
+      </form>
+
+  <div id="result" class="notification is-hidden mt-4"></div>
+
+  <script>
+
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function fillFormFromJSON(json, group) {
+      const form = document.getElementById('inventoryForm');
+      form.name.value = group;
+      form.os_keyboard_layout.value = json.os_keyboard_layout || "";
+      form.os_system_language.value = json.os_system_language || "";
+
+      form.os_firewall.value = String(json.os_firewall) || "false";
+      form.os_access_control.value = json.os_access_control || "disabled";
+      form.os_partitioning.value = json.os_partitioning || "";
+
+      form["os_operating_system.distribution"].value = json.os_operating_system?.distribution || "";
+      form["os_operating_system.distribution_major_version"].value = json.os_operating_system?.distribution_major_version || "";
+      form["os_operating_system.distribution_version"].value = json.os_operating_system?.distribution_version || "";
+      form["os_operating_system.repositories_environment"].value = json.os_operating_system?.repositories_environment || "";
+
+      form.os_preserve_efi_first_boot_device.value = String(json.os_preserve_efi_first_boot_device) || "false";
+    }
+
+    async function loadFormData() {
+      const group = getQueryParam("group");
+      if (!group) return;
+
+      const resultp = document.getElementById('main_title');
+      resultp.innerHTML = group.replace('os_','');
+
+      try {
+        const response = await fetch(`http://localhost:5000/api/v1/inventory/groups/${group}`);
+        if (response.ok) {
+          const data = await response.json();
+          fillFormFromJSON(data, group);
+        } else {
+          console.warn("Failed to load data for group:", group);
+        }
+      } catch (error) {
+        console.error("Error fetching group data:", error);
+      }
+    }
+
+    document.getElementById('inventoryForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      const form = event.target;
+
+      const data = {
+        name: form.name.value,
+        os_preserve_efi_first_boot_device: form.os_preserve_efi_first_boot_device.value === 'true',
+        os_access_control: form.os_access_control.value,
+        os_firewall: form.os_firewall.value === 'true',
+        os_partitioning: form.os_partitioning.value,
+        os_operating_system: {
+          distribution: form["os_operating_system.distribution"].value,
+          distribution_major_version: form["os_operating_system.distribution_major_version"].value,
+          distribution_version: form["os_operating_system.distribution_version"].value,
+          repositories_environment: form["os_operating_system.repositories_environment"].value
+        },
+        os_keyboard_layout: form.os_keyboard_layout.value,
+        os_system_language: form.os_system_language.value
+      };
+
+      const group = getQueryParam("group");
+      const url = `http://localhost:5000/api/v1/inventory/groups/${group}`
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      let responseData;
+      try {
+        responseData = await response.json();
+      } catch (jsonError) {
+        responseData = await response.text();
+      }
+
+      const resultDiv = document.getElementById('result');
+      if (response.ok) {
+        resultDiv.className = "notification is-success";
+        resultDiv.innerHTML = `Group successfully updated!<br>Server response: ${typeof responseData === 'string' ? responseData : JSON.stringify(responseData)}`;
+        setTimeout(() => {
+          window.location.href = 'http://localhost:5000/inventory/groups';
+        }, 2000); // delay in milliseconds
+      } else {
+        resultDiv.className = "notification is-danger";
+        resultDiv.innerHTML = `Error updating group.<br>Server response: ${typeof responseData === 'string' ? responseData : JSON.stringify(responseData)}`;
+      }
+      resultDiv.classList.remove("is-hidden");
+      });
+
+    window.addEventListener('DOMContentLoaded', loadFormData);
+
+  </script>
+
+</div>
